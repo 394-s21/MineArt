@@ -5,7 +5,7 @@ import { DUMMY_EDITED_IMAGE_URLS } from "../../utils/mock";
 import { DUMMY_NAMES } from "../../utils/mock";
 import styles from "./styles";
 
-const EditImageScreen = () => {
+const SocialGalleryScreen = () => {
   return (
     <SafeAreaView style={styles.layout}>
       <Gallery imageUrls={DUMMY_EDITED_IMAGE_URLS} names={DUMMY_NAMES}/>
@@ -13,4 +13,4 @@ const EditImageScreen = () => {
   );
 };
 
-export default EditImageScreen;
+export default SocialGalleryScreen;
