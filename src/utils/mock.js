@@ -1,0 +1,23 @@
+export const DUMMY_IMAGE_URLS = [
+    'https://images.metmuseum.org/CRDImages/ep/original/DT49.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP-19451-001.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP318843.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP255071.jpg',
+    'https://images.metmuseum.org/CRDImages/rl/original/DP-13487-001.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP109484.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT4635.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP167124.jpg',
+    'https://images.metmuseum.org/CRDImages/rl/original/DT704.jpg',
+    'https://images.metmuseum.org/CRDImages/rl/original/DT3006.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT5275.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT5475.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT31.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP-19501-001.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP123935.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT2838.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DT5279.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP-20748-001.jpg',
+    'https://images.metmuseum.org/CRDImages/es/original/DP106672.jpg',
+    'https://images.metmuseum.org/CRDImages/ep/original/DP-19709-001.jpg'
+]

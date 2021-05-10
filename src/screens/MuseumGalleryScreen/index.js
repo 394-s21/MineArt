@@ -1,16 +1,15 @@
 import React from "react";
-import { Layout, Text } from "@ui-kitten/components";
-import ImageTile from "../../components/ImageTile";
+import { SafeAreaView } from 'react-native';
+import { Layout, } from "@ui-kitten/components";
+import Gallery from "../../components/Gallery";
+import { DUMMY_IMAGE_URLS } from "../../utils/mock";
+import styles from "./styles";
 
 const MuseumGalleryScreen = () => {
-  const dummy_data = new Array(5).fill(0);
   return (
-    <Layout>
-      <Text>This is the museum gallery screen</Text>
-      {dummy_data.map((data) => {
-        return <ImageTile />;
-      })}
-    </Layout>
+    <SafeAreaView style={styles.layout}>
+      <Gallery imageUrls={DUMMY_IMAGE_URLS} />
+    </SafeAreaView>
   );
 };
 
