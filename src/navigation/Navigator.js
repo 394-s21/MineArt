@@ -7,21 +7,25 @@ import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/componen
 // screen imports
 import MuseumGalleryScreen from "../screens/MuseumGalleryScreen";
 import SocialGalleryScreen from "../screens/SocialGalleryScreen";
+import styles from "./styles";
+import { SafeAreaView } from "react-native";
 
 const BottomNav = createBottomTabNavigator();
 
 const BottomTabBar = ({ navigation, state }) => (
-    <BottomNavigation
-        selectedIndex={state.index}
-        onSelect={(index) => {navigation.navigate(state.routeNames[index])}}
-    >
-        <BottomNavigationTab icon={(props) => (
-            <Icon {...props} name="image-outline" />
-        )} />
-        <BottomNavigationTab icon={(props) => (
-            <Icon {...props} name="people-outline" />
-        )} />
-    </BottomNavigation>
+    <SafeAreaView>
+        <BottomNavigation
+            selectedIndex={state.index}
+            onSelect={(index) => {navigation.navigate(state.routeNames[index])}}
+        >
+            <BottomNavigationTab icon={(props) => (
+                <Icon {...props} name="image-outline" />
+            )} />
+            <BottomNavigationTab icon={(props) => (
+                <Icon {...props} name="people-outline" />
+            )} />
+        </BottomNavigation>
+    </SafeAreaView>
 );
 
 const BottomTabNavigator = () => (
