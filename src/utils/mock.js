@@ -21,3 +21,21 @@ export const DUMMY_IMAGE_URLS = [
     'https://images.metmuseum.org/CRDImages/es/original/DP106672.jpg',
     'https://images.metmuseum.org/CRDImages/ep/original/DP-19709-001.jpg'
 ]
+
+export const DUMMY_EDITED_IMAGE_URLS = [
+    "https://i.imgur.com/9Zii7ob.jpg",
+    "https://i.imgur.com/4bYyTMz.jpg",
+    "https://i.imgur.com/TWUTNDj.jpg",
+    "https://i.imgur.com/77nksrB.jpg",
+    "https://i.imgur.com/OWdCk0N.jpg",
+    "https://i.imgur.com/K12YKzb.jpg"
+]
+
+export const DUMMY_NAMES = [
+    "Elise L.",
+    "Aura U.",
+    "Sanath A.",
+    "Peizhi L.",
+    "Andy M.",
+    "Jeff Y."
+]

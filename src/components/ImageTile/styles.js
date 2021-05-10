@@ -4,7 +4,10 @@ const styles = StyleSheet.create({
     image: {
         height: 250,
         width: 250,
-        margin: 20,
+        marginLeft: 25,
+        marginRight: 25,
+        marginTop: 35,
+        marginBottom: 10
     }
 });
 
