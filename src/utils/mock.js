@@ -39,3 +39,18 @@ export const DUMMY_NAMES = [
     "Andy M.",
     "Jeff Y."
 ]
+
+export const DUMMY_TITLE = "The Dream of the Shepherd (Der Traum des Hirten)";
+export const DUMMY_ARTIST = "Ferdinand Hodler";
+export const DUMMY_DATE = "1896";
+export const DUMMY_DESCRIPTION = 'In the lower, terrestrial portion of this composition, the '
+                                + 'shepherd kneels in an Alpine landscape, while in the upper, '
+                                + 'celestial portion, a vision unfolds of eight nude women. In '
+                                + 'contrast to the shepherd’s muscular, naturalistically depicted body, '
+                                + 'their pale, ethereal forms indicate that they are apparitions. '
+                                + 'The women may symbolize enlightenment, harmony with nature, '
+                                + 'and erotic desire. Their frieze-like arrangement and stylized, '
+                                + 'rhythmic gestures recall the work of Puvis de Chavannes, which '
+                                + 'Hodler greatly admired. This ambitious composition, first exhibited '
+                                + 'in Geneva in 1896, was one of the paintings that earned the Swiss '
+                                + 'artist notoriety for his exploration of sexuality, mortality, and the unconscious.';
