@@ -24,7 +24,7 @@ export const DUMMY_IMAGE_URLS = [
 
 export const DUMMY_EDITED_IMAGE_URLS = [
     "https://i.imgur.com/9Zii7ob.jpg",
-    "https://i.imgur.com/4bYyTMz.jpg",
+    "https://i.imgur.com/9Zii7ob.jpg",
     "https://i.imgur.com/TWUTNDj.jpg",
     "https://i.imgur.com/77nksrB.jpg",
     "https://i.imgur.com/OWdCk0N.jpg",
@@ -54,3 +54,5 @@ export const DUMMY_DESCRIPTION = 'In the lower, terrestrial portion of this comp
                                 + 'Hodler greatly admired. This ambitious composition, first exhibited '
                                 + 'in Geneva in 1896, was one of the paintings that earned the Swiss '
                                 + 'artist notoriety for his exploration of sexuality, mortality, and the unconscious.';
+export const DUMMY_EDITED_IMAGE = "https://i.imgur.com/1cZo2cN.jpg";
+export const DUMMY_NAME = "Chris R.";

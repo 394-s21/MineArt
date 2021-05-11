@@ -11,6 +11,7 @@ import SocialGalleryScreen from "../screens/SocialGalleryScreen";
 import IOWScreen from "../screens/IOWScreen";
 import styles from "./styles";
 import { SafeAreaView } from "react-native";
+import EditImageScreen from "../screens/EditImageScreen";
 
 
 
@@ -42,6 +43,7 @@ const BottomTabNavigator = () => (
         <BottomNav.Screen name='IOW' component={IOWStackScreen} />
         <BottomNav.Screen name='Museum Gallery' component={MuseumStackScreen}/>
         <BottomNav.Screen name='Social Gallery' component={SocialStackScreen}/>
+        <BottomNav.Screen name="Editor Screen" component={EditImageScreen}/>
     </BottomNav.Navigator>
 );
 
@@ -59,6 +61,9 @@ const BottomTabBar = ({ navigation, state }) => (
             )} />
             <BottomNavigationTab icon={(props) => (
                 <Icon {...props} name="people-outline" />
+            )} />
+            <BottomNavigationTab icon={(props) => (
+              <Icon {...props} name="brush-outline"/>
             )} />
         </BottomNavigation>
     </SafeAreaView>
