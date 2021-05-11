@@ -9,14 +9,26 @@ import styles from "./styles";
 const SocialGalleryScreen = () => {
   const firebase = useFirebaseContext();
   const db = firebase.firestore();
+  const storage = firebase.storage();
+
   const [images, setImages] = useState([]);
   const [names, setNames] = useState([]);
+
+
   useEffect(() => {
     const unsubscribe = db.collection("social-feed").doc("test")
-      .onSnapshot((doc) => {
-        setImages(doc.get("images"))
+      .onSnapshot(async (doc) => {
         setNames(doc.get("names"))
+        const images = doc.get("images")
+
+
+        const urlOps = images.map((url) => {
+          return storage.ref(url).getDownloadURL()
+        })
+        const urls = await Promise.all(urlOps);
+        setImages(urls)
       })
+
       return () => unsubscribe();
   }, [])
   return (
