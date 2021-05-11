@@ -1,10 +1,9 @@
 import React, {createContext, useContext} from 'react';
 import app from 'firebase/app';
 import firestore from "firebase/firestore";
-export const FirebaseContext = createContext(undefined);
- 
+import storage from "firebase/storage";
 
-  
+export const FirebaseContext = createContext(undefined);
 
 export const FirebaseProvider = ({children}) => { 
   if (!app.apps.length) {
