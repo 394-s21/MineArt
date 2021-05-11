@@ -6,7 +6,7 @@ import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header
 import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST, DUMMY_DESCRIPTION } from "../../utils/mock";
 import styles from "./styles";
 
-const IOWScreen = () => {
+const IOWScreen = ({ navigation }) => {
   const window = Dimensions.get('window');
   const [height, setHeight] = useState(window.height / 2);
   const [landscape, setLandscape] = useState(window.height < window.width);
@@ -35,6 +35,61 @@ const IOWScreen = () => {
 
   const portraitMargin = { marginLeft: '15%', marginRight: '15%'};
   const landscapeMargin = { marginLeft: '25%', marginRight: '25%'};
+
+  const Info = () => {
+    return (
+      <View style={{width:"100%"}}>
+        <Head/>
+        <Divider/>
+        <Description/>
+        <EditButton/>
+      </View>
+      
+    );
+  }
+  
+  const Head = () => {
+    return (
+      <View>
+        <Text category='h3'>
+          {DUMMY_TITLE}
+        </Text>
+        <Text 
+          category='h5' 
+          appearance='hint'
+        >
+          {`${DUMMY_ARTIST}, ${DUMMY_DATE}`}
+        </Text>
+      </View>
+      
+    );
+  }
+  
+  const Description = () => {
+    return (
+      <Text 
+        category='p1'
+        style={{paddingTop: 10}}
+      >
+        {DUMMY_DESCRIPTION}
+      </Text>
+    );
+  }
+  
+  const EditButton = () => {
+    
+  
+    return (
+      <View style={styles.buttonWrapper}>
+        <Button 
+          style={styles.button}
+          onPress={() => {navigation.navigate("Editor Screen")}}
+        >
+          Modify
+        </Button>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} >
@@ -71,53 +126,5 @@ const IOWScreen = () => {
     </SafeAreaView>
   );
 };
-
-const Info = () => {
-  return (
-    <View style={{width:"100%"}}>
-      <Head/>
-      <Divider/>
-      <Description/>
-      <EditButton/>
-    </View>
-    
-  );
-}
-
-const Head = () => {
-  return (
-    <View>
-      <Text category='h3'>
-        {DUMMY_TITLE}
-      </Text>
-      <Text 
-        category='h5' 
-        appearance='hint'
-      >
-        {`${DUMMY_ARTIST}, ${DUMMY_DATE}`}
-      </Text>
-    </View>
-    
-  );
-}
-
-const Description = () => {
-  return (
-    <Text 
-      category='p1'
-      style={{paddingTop: 10}}
-    >
-      {DUMMY_DESCRIPTION}
-    </Text>
-  );
-}
-
-const EditButton = () => {
-  return (
-    <View style={styles.buttonWrapper}>
-      <Button style={styles.button}>Modify</Button>
-    </View>
-  );
-}
 
 export default IOWScreen;
