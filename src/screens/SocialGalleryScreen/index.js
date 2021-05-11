@@ -1,14 +1,27 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { SafeAreaView } from 'react-native';
 import Gallery from "../../components/Gallery";
-import { DUMMY_EDITED_IMAGE_URLS } from "../../utils/mock";
-import { DUMMY_NAMES } from "../../utils/mock";
+import { useFirebaseContext } from "../../providers/firebaseProvider";
 import styles from "./styles";
 
 const SocialGalleryScreen = () => {
+  const firebase = useFirebaseContext();
+  const db = firebase.firestore();
+  const [images, setImages] = useState([]);
+  const [names, setNames] = useState([]);
+  useEffect(() => {
+    const unsubscribe = db.collection("social-feed").doc("test")
+      .onSnapshot((doc) => {
+        setImages(doc.get("images"))
+        setNames(doc.get("names"))
+      })
+      return () => unsubscribe();
+  }, [])
   return (
     <SafeAreaView style={styles.layout}>
-      <Gallery imageUrls={DUMMY_EDITED_IMAGE_URLS} names={DUMMY_NAMES}/>
+      <Gallery imageUrls={images} names={names}/>
     </SafeAreaView>
   );
 };
