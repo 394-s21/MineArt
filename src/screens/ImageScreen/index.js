@@ -6,7 +6,7 @@ import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header
 import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST, DUMMY_DESCRIPTION } from "../../utils/mock";
 import styles from "./styles";
 
-const IOWScreen = ({ navigation }) => {
+const ImageScreen = ({ navigation }) => {
   const window = Dimensions.get('window');
   const [height, setHeight] = useState(window.height / 2);
   const [landscape, setLandscape] = useState(window.height < window.width);
@@ -42,7 +42,10 @@ const IOWScreen = ({ navigation }) => {
         <Head/>
         <Divider/>
         <Description/>
-        <EditButton/>
+        <View style={styles.buttonsWrapper}>
+          <EditButton/>
+          <SocialGalleryButton/>
+        </View>
       </View>
       
     );
@@ -75,19 +78,26 @@ const IOWScreen = ({ navigation }) => {
       </Text>
     );
   }
+
+  const SocialGalleryButton = () => {
+    return (
+      <Button 
+        style={styles.button}
+        onPress={() => {navigation.navigate("Social Gallery")}}
+      >
+        View Creations
+      </Button>
+    );
+  }
   
   const EditButton = () => {
-    
-  
     return (
-      <View style={styles.buttonWrapper}>
-        <Button 
+      <Button 
           style={styles.button}
-          onPress={() => {navigation.navigate("Editor Screen")}}
+          onPress={() => {navigation.navigate("Edit Image")}}
         >
-          Modify
+          Create
         </Button>
-      </View>
     );
   }
 
@@ -127,4 +137,4 @@ const IOWScreen = ({ navigation }) => {
   );
 };
 
-export default IOWScreen;
+export default ImageScreen;

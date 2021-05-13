@@ -8,42 +8,36 @@ import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/componen
 // screen imports
 import MuseumGalleryScreen from "../screens/MuseumGalleryScreen";
 import SocialGalleryScreen from "../screens/SocialGalleryScreen";
-import IOWScreen from "../screens/IOWScreen";
+import ImageScreen from "../screens/ImageScreen";
+import AboutScreen from "../screens/AboutScreen";
+import EditImageScreen from "../screens/EditImageScreen";
 import styles from "./styles";
 import { SafeAreaView } from "react-native";
-import EditImageScreen from "../screens/EditImageScreen";
-
 
 
 const MuseumStack = createStackNavigator();
 const MuseumStackScreen = () => (
     <MuseumStack.Navigator>
         <MuseumStack.Screen name='Museum Gallery' component={MuseumGalleryScreen} />
+        <MuseumStack.Screen name='Image Details' component={ImageScreen} options={{ title: 'About Artwork' }}/>
+        <MuseumStack.Screen name='Edit Image' component={EditImageScreen}/>
+        <MuseumStack.Screen name='Social Gallery' component={SocialGalleryScreen} options={{ title: 'Artwork Gallery' }}/>
     </MuseumStack.Navigator>
 );
 
-const SocialStack = createStackNavigator();
-const SocialStackScreen = () => (
-    <SocialStack.Navigator>
-        <SocialStack.Screen name='Social Gallery' component={SocialGalleryScreen} />
-    </SocialStack.Navigator>
-);
-
-const IOWStack = createStackNavigator();
-const IOWStackScreen = () => (
-    <IOWStack.Navigator >
-        <IOWStack.Screen name='Image of the Week' component={IOWScreen} />
-    </IOWStack.Navigator>
+const AboutStack = createStackNavigator();
+const AboutStackScreen = () => (
+    <AboutStack.Navigator >
+        <AboutStack.Screen name='About Us' component={AboutScreen} />
+    </AboutStack.Navigator>
 );
 
 
 const BottomNav = createBottomTabNavigator();
 const BottomTabNavigator = () => (
     <BottomNav.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-        <BottomNav.Screen name='IOW' component={IOWStackScreen} />
         <BottomNav.Screen name='Museum Gallery' component={MuseumStackScreen}/>
-        <BottomNav.Screen name='Social Gallery' component={SocialStackScreen}/>
-        <BottomNav.Screen name="Editor Screen" component={EditImageScreen}/>
+        <BottomNav.Screen name='About' component={AboutStackScreen}/>
     </BottomNav.Navigator>
 );
 
@@ -54,16 +48,10 @@ const BottomTabBar = ({ navigation, state }) => (
             onSelect={(index) => {navigation.navigate(state.routeNames[index])}}
         >
             <BottomNavigationTab icon={(props) => (
-                <Icon {...props} name="calendar-outline" />
-            )} />
-            <BottomNavigationTab icon={(props) => (
                 <Icon {...props} name="image-outline" />
             )} />
             <BottomNavigationTab icon={(props) => (
                 <Icon {...props} name="people-outline" />
-            )} />
-            <BottomNavigationTab icon={(props) => (
-              <Icon {...props} name="brush-outline"/>
             )} />
         </BottomNavigation>
     </SafeAreaView>

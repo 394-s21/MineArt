@@ -18,7 +18,7 @@ const SocialGalleryScreen = () => {
   useEffect(() => {
     const unsubscribe = db.collection("social-feed").doc("test")
       .onSnapshot(async (doc) => {
-        setNames(doc.get("names"))
+        setNames(doc.get("names").reverse())
         const images = doc.get("images")
 
 
@@ -26,7 +26,7 @@ const SocialGalleryScreen = () => {
           return storage.ref(url).getDownloadURL()
         })
         const urls = await Promise.all(urlOps);
-        setImages(urls)
+        setImages(urls.reverse());
       })
 
       return () => unsubscribe();
