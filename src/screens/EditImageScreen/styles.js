@@ -5,12 +5,16 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
-    height: "90%"
+    justifyContent: "center",
+    height: "100%",
+    backgroundColor: "white"
   },
   heading: {
     marginVertical: 30,
     textAlign: "center"
+  },
+  shareButton: {
+    marginTop: 50
   }
 });
 

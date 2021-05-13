@@ -19,7 +19,7 @@ const MuseumStack = createStackNavigator();
 const MuseumStackScreen = () => (
     <MuseumStack.Navigator>
         <MuseumStack.Screen name='Museum Gallery' component={MuseumGalleryScreen} />
-        <MuseumStack.Screen name='Image Details' component={ImageScreen} options={{ title: 'About Artwork' }}/>
+        <MuseumStack.Screen name='Image Details' component={ImageScreen} options={{ title: 'Explore Artwork' }}/>
         <MuseumStack.Screen name='Edit Image' component={EditImageScreen}/>
         <MuseumStack.Screen name='Social Gallery' component={SocialGalleryScreen} options={{ title: 'Artwork Gallery' }}/>
     </MuseumStack.Navigator>
