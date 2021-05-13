@@ -12,13 +12,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height:"100%"
   }, 
-  buttonWrapper: {
-    flex:1,
-    flexDirection: "row-reverse"
+  buttonsWrapper: {
+    flexDirection: "row",
+    justifyContent:"center"
   },
   button: {
     marginTop: 25,
-    width: 100,
+    marginLeft: 15,
+    marginRight: 15
   }
 });
 
