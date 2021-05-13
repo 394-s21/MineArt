@@ -118,6 +118,7 @@ const ImageScreen = ({ navigation }) => {
             style={[{
                       height: height, 
                       opacity: opacity,
+                      marginTop: 10
                     }]}
           />  
         )}

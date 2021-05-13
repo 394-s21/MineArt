@@ -34,9 +34,9 @@ const EditImageScreen = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={styles.root}>
-      <Text style={styles.heading} category="h2"> Edit the painting of the week below! </Text>
+      <Text style={styles.heading} category="h2">Put your own spin on the painting below! </Text>
       <ImageTile imageUrl={"https://images.metmuseum.org/CRDImages/ep/original/DP318843.jpg"}/>
-      <Button onPress={shareEdit}> Share </Button>
+      <Button style={styles.shareButton} onPress={shareEdit}> Share </Button>
     </SafeAreaView>
   )
 }
