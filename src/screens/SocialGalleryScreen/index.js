@@ -1,6 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from 'react-native';
 import Gallery from "../../components/Gallery";
 import { useFirebaseContext } from "../../providers/firebaseProvider";

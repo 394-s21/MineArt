@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from 'react-native';
 import Gallery from "../../components/Gallery";
 import { DUMMY_IMAGE_URLS } from "../../utils/mock";
 import { useFirebaseContext } from "../../providers/firebaseProvider";
 import styles from "./styles";
-import { useEffect, useState } from "react/cjs/react.development";
 
 
 const MuseumGalleryScreen = () => {
