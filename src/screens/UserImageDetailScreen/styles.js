@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    justifyContent: 'center',
-    height: '100%'
+    height: '100%',
+    backgroundColor: 'white'
   },
   layout: {
     flex: 1,
-    justifyContent: 'center',
     height: '100%',
+    backgroundColor: 'white',
     padding: 30
   }
 });
