@@ -22,7 +22,7 @@ const SocialGalleryScreen = () => {
         const images = doc.get('images');
 
         const urlOps = images.map((url) => {
-          return storage.ref(url).getDownloadURL();
+          return storage.ref(url.replace(".", "-thumbnail.")).getDownloadURL();
         });
         const urls = await Promise.all(urlOps);
         setImages(urls.reverse());
