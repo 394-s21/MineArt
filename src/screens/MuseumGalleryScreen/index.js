@@ -20,7 +20,10 @@ const MuseumGalleryScreen = () => {
       })
       .then(async (images) => {
         const urlOps = images.map((url) => {
-          return storage.ref(url).getDownloadURL();
+          console.log(url)
+         
+          return storage.ref(url.replace(".", "-thumbnail."))
+                        .getDownloadURL();
         });
         const urls = await Promise.all(urlOps);
         setMuseumUrls(urls);
