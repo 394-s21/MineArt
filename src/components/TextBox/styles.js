@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  image: {
+  layout: {
     borderRadius: 5,
-    margin: 10
+    padding: 10,
+    backgroundColor: '#d9dadb',
+    maxWidth: 330
   }
 });
 

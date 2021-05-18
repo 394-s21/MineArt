@@ -8,9 +8,16 @@ const styles = StyleSheet.create({
   },
   layout: {
     flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '100%',
     backgroundColor: 'white',
     padding: 30
+  },
+  textBoxTitle: {
+    marginTop: 30,
+    marginBottom: 10
   }
 });
 
