@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
 import { SafeAreaView, View, Animated, Dimensions } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import CardFlip from 'react-native-card-flip';
 
 import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST, DUMMY_DESCRIPTION } from "../../utils/mock";
 import styles from "./styles";
@@ -77,6 +78,12 @@ const ImageScreen = ({ navigation }) => {
         {DUMMY_DESCRIPTION}
       </Text>
     );
+  }
+
+  const prompt = () => {
+    return(
+      <text>yes</text>
+    )
   }
 
   const SocialGalleryButton = () => {
