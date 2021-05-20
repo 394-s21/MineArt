@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
-import { SafeAreaView, View, Animated, Dimensions } from 'react-native';
+import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import CardFlip from 'react-native-card-flip';
 
@@ -42,7 +42,7 @@ const ImageScreen = ({ navigation }) => {
       <View style={{width:"100%"}}>
         <Head/>
         <Divider/>
-        <Description/>
+        <Prompt/>
         <View style={styles.buttonsWrapper}>
           <EditButton/>
           <SocialGalleryButton/>
@@ -80,9 +80,12 @@ const ImageScreen = ({ navigation }) => {
     );
   }
 
-  const prompt = () => {
+  const Prompt = () => {
     return(
-      <text>yes</text>
+      <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
+        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>AB</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>CD</Text></TouchableOpacity>
+      </CardFlip>
     )
   }
 
