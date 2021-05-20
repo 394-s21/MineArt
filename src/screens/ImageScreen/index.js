@@ -2,9 +2,11 @@ import React, { useRef, useEffect, useState } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
 import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
-import CardFlip from 'react-native-card-flip';
+//import CardFlip from "react-native-card-flip";
 
 import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST, DUMMY_DESCRIPTION } from "../../utils/mock";
+import GestureFlipView from 'react-native-gesture-flip-card';
+
 import styles from "./styles";
 
 const ImageScreen = ({ navigation }) => {
@@ -42,7 +44,7 @@ const ImageScreen = ({ navigation }) => {
       <View style={{width:"100%"}}>
         <Head/>
         <Divider/>
-        <Prompt/>
+        {/* <Prompt/> */}
         <View style={styles.buttonsWrapper}>
           <EditButton/>
           <SocialGalleryButton/>
@@ -80,14 +82,32 @@ const ImageScreen = ({ navigation }) => {
     );
   }
 
-  const Prompt = () => {
-    return(
-      <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
-        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>AB</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>CD</Text></TouchableOpacity>
-      </CardFlip>
-    )
+  const Prompt = () =>{
+    return (
+      <View>
+      <GestureFlipView width={300} height={500}>
+        {renderBack()}
+        {renderFront()}
+      </GestureFlipView>
+      </View>
+    );
   }
+
+  const renderFront = () => {
+    return (
+      <View style={styles.frontStyle}>
+        <Text style={{fontSize: 25, color: '#fff'}}>{'Front'}</Text>
+      </View>
+    );
+  };
+  
+  const renderBack = () => {
+    return (
+      <View style={styles.backStyle}>
+        <Text style={{fontSize: 25, color: '#fff'}}>{'Back'}</Text>
+      </View>
+    );
+  };
 
   const SocialGalleryButton = () => {
     return (
