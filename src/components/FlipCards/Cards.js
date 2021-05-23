@@ -3,11 +3,15 @@ import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity, StatusBar, 
 import CardFlip from "react-native-card-flip";
 import styles from "./styles";
 
+//ref={(card) => (this.card = card)}
 
-const Cards = () => {
+const Cards = (props) => {
+
+    const flipcard = useRef()
+
       return (
         <View style={styles.flipContainer}>
-        <CardFlip style={styles.cardContainer} ref={card => (this.card = card)}>
+        <CardFlip style={styles.cardContainer} ref={flipcard}>
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.card, styles.card1]}
