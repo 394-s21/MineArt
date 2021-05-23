@@ -15,13 +15,13 @@ const Cards = (props) => {
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.card, styles.card1]}
-            onPress={() => this.card.flip()}>
+            onPress={() => flipcard.current.flip()}>
             <Text style={styles.label}>AB</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.card, styles.card2]}
-            onPress={() => this.card.flip()}>
+            onPress={() => flipcard.current.flip()}>
             <Text style={styles.label}>CD</Text>
           </TouchableOpacity>
         </CardFlip>
