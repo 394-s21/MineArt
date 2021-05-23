@@ -7,14 +7,29 @@ import { Button } from "@ui-kitten/components";
 import { useFirebaseContext } from "../../providers/firebaseProvider";
 import { useEffect } from "react";
 import { DUMMY_EDITED_IMAGE, DUMMY_NAME } from "../../utils/mock";
+import PhotoEditor from 'react-native-photo-editor';
+
+import * as MediaLibrary from 'expo-media-library';
+import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions'
 
 const EditImageScreen = ({ navigation }) => {
   const firebase = useFirebaseContext();
   const db = firebase.firestore();
 
+  useEffect(() => {
+
+    let URI = downloadFile();
+    console.log(URI)
+    PhotoEditor.Edit({
+      path: URI,
+      onDone: () => {navigation.navigate("Social Gallery");},
+      onCancel: () => {navigation.navigate("Museum Gallery");},
+    })
+  }, []);
 
   // Clear the test data on a refresh 
-  useEffect(() => {
+useEffect(() => {
     db.collection("social-feed").doc("test").update({
       images: firebase.firestore.FieldValue.arrayRemove(DUMMY_EDITED_IMAGE),
       names: firebase.firestore.FieldValue.arrayRemove(DUMMY_NAME)
@@ -40,5 +55,28 @@ const EditImageScreen = ({ navigation }) => {
     </SafeAreaView>
   )
 }
+
+let downloadFile = () => {
+  const uri = "https://images.metmuseum.org/CRDImages/ep/original/DP318843.jpg"
+  let fileUri = FileSystem.documentDirectory + "test.jpg";
+  FileSystem.downloadAsync(uri, fileUri)
+  .then(({ uri }) => {
+      saveFile(uri);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  return fileUri;
+}
+
+let saveFile = async (fileUri) => {
+  const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  if (status === "granted") {
+      const asset = await MediaLibrary.createAssetAsync(fileUri)
+      await MediaLibrary.createAlbumAsync("Download", asset, false)
+  }
+}
+
+
 
 export default EditImageScreen;
