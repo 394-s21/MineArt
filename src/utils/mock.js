@@ -24,7 +24,7 @@ export const DUMMY_IMAGE_URLS = [
 
 export const DUMMY_EDITED_IMAGE_URLS = [
     "https://i.imgur.com/9Zii7ob.jpg",
-    "https://i.imgur.com/9Zii7ob.jpg",
+    "https://i.imgur.com/4bYyTMz.jpg",
     "https://i.imgur.com/TWUTNDj.jpg",
     "https://i.imgur.com/77nksrB.jpg",
     "https://i.imgur.com/OWdCk0N.jpg",
@@ -56,3 +56,18 @@ export const DUMMY_DESCRIPTION = 'In the lower, terrestrial portion of this comp
                                 + 'artist notoriety for his exploration of sexuality, mortality, and the unconscious.';
 export const DUMMY_EDITED_IMAGE = "test/social-feed/test-6.jpg";
 export const DUMMY_NAME = "Chris R.";
+
+export const leftPrompt="First Impression: COLORS! Why does it look kind of bleak?"
+export const leftExplanation="Most of the painting is made up of dull oranges, blues, and greens, which form the backdrop for the boats and the sunrise. The sun and the reflection really JUMPS OUT from the rest of the dull tones."
+export const leftAction="Try changing its colors to give it a new look."
+export const leftSource="Source: https://drawpaintacademy.com/impression-sunrise/"
+
+export const centerPrompt="Now a Closer Look: BRUSH! Why does it look hastily painted?"
+export const centerExplanation="Monet’s aim was not to create an accurate landscape but to record the impressions formed while looking at it. Critic Leroy used “impressionism” to mock it, but the term was later adopted as the term of the movement."
+export const centerAction="Not a fan? Try overwriting its brushstrokes."
+export const centerSource="Source: https://drawpaintacademy.com/impression-sunrise/https://www.claude-monet.com/impression-sunrise.jsp"
+
+export const rightPrompt="Lastly, MESSAGE! What does this painting want to express?"
+export const rightExplanation="Monet’s depiction of the sunrise in Le Havre, hometown of Monet and a center of industry and commerce, celebrates “the renewed strength and beauty of France”"
+export const rightAction="What message does your painting convey?"
+export const rightSource="https://en.wikipedia.org/wiki/Impression,_Sunrise"
