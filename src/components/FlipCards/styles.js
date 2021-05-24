@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-const cardWidth= 200;
-const cardHeight= 300;
+const cardWidth= 320;
+const cardHeight= 320;
 
 const styles = StyleSheet.create({
     container: {
@@ -18,13 +18,16 @@ const styles = StyleSheet.create({
       width: cardWidth,
       height: cardHeight,
       backgroundColor: '#FE474C',
-      borderRadius: 5,
+      borderRadius: 7,
       shadowColor: 'rgba(0,0,0,0.5)',
       shadowOffset: {
         width: 0,
         height: 1,
       },
       shadowOpacity: 0.5,
+      alignItems: "center",
+      justifyContent: 'center',
+      paddingHorizontal: 3
     },
     card1: {
       backgroundColor: '#FE474C',
@@ -33,13 +36,42 @@ const styles = StyleSheet.create({
       backgroundColor: '#FEB12C',
     },
     label: {
-      lineHeight: 300,
+      lineHeight: 50,
       textAlign: 'center',
-      fontSize: 55,
+      fontSize: 40,
+      fontWeight:"bold",
       fontFamily: 'System',
       color: '#ffffff',
       backgroundColor: 'transparent',
     },
+    explanation: {
+     
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight:"bold",
+        fontFamily: 'System',
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+        "text-shadow":"2px 2px #ff0000"
+      },
+    action: {
+        paddingTop:"12%",
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight:"bold",
+        fontFamily: 'System',
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+        "text-shadow":"2px 2px #ff0000"
+        },
+    source: {
+        position:"absolute",
+        bottom:0, 
+        fontSize:9,
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+        textAlign: 'center',
+    }
   });
 
 export default styles;

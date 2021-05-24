@@ -3,12 +3,10 @@ import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity, StatusBar, 
 import CardFlip from "react-native-card-flip";
 import styles from "./styles";
 
-//ref={(card) => (this.card = card)}
-
-const Cards = (props) => {
-
+const Card = (props) => {
     const flipcard = useRef()
-
+    console.log("this the props")
+    console.log(props)
       return (
         <View style={styles.flipContainer}>
         <CardFlip style={styles.cardContainer} ref={flipcard}>
@@ -16,16 +14,18 @@ const Cards = (props) => {
             activeOpacity={1}
             style={[styles.card, styles.card1]}
             onPress={() => flipcard.current.flip()}>
-            <Text style={styles.label}>AB</Text>
+            <Text style={styles.label}>{props.question}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.card, styles.card2]}
             onPress={() => flipcard.current.flip()}>
-            <Text style={styles.label}>yayyyy</Text>
+            <Text style={styles.explanation}>{props.explanation}</Text>
+            <Text style={styles.action}>{props.action}</Text>
+            <Text style={styles.source}>{props.source}</Text>
           </TouchableOpacity>
         </CardFlip>
       </View>
     );}
 
-export default Cards;
+export default Card;
