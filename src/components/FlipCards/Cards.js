@@ -22,7 +22,7 @@ const Cards = (props) => {
             activeOpacity={1}
             style={[styles.card, styles.card2]}
             onPress={() => flipcard.current.flip()}>
-            <Text style={styles.label}>CD</Text>
+            <Text style={styles.label}>yayyyy</Text>
           </TouchableOpacity>
         </CardFlip>
       </View>

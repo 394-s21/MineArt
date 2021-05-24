@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+const cardWidth= 200;
+const cardHeight= 300;
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -8,12 +11,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5FCFF',
     },
     cardContainer: {
-      width: 320,
-      height: 470,
+      width: cardWidth,
+      height: cardHeight,
     },
     card: {
-      width: 320,
-      height: 470,
+      width: cardWidth,
+      height: cardHeight,
       backgroundColor: '#FE474C',
       borderRadius: 5,
       shadowColor: 'rgba(0,0,0,0.5)',
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FEB12C',
     },
     label: {
-      lineHeight: 470,
+      lineHeight: 300,
       textAlign: 'center',
       fontSize: 55,
       fontFamily: 'System',
