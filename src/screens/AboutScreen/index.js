@@ -45,7 +45,6 @@ const AboutScreen = () => {
         return imageUrl;
       });
       const urls = await Promise.all(urlOps);
-      console.log(urls)
       const updatedProfiles = urls.map((url, idx) => 
         <Profile 
           imageUrl={url}

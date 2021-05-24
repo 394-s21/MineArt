@@ -14,19 +14,18 @@ const Post = ({ imageUrl, name }) => {
   );
 };
 
-const Gallery = ({ imageUrls, names }) => {
+const Gallery = ({ imageUrls, names, keys }) => {
   // for museum gallery, displayName is false
   // for social gallery, displayName is true
   const displayName = names && names.length >= imageUrls.length;
-
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <Layout style={styles.imageWrapper}>
-        {imageUrls.map((imageUrl, i) => {
+        {imageUrls && imageUrls.map((imageUrl, i) => {
           return displayName ? (
-            <Post key={imageUrl} imageUrl={imageUrl} name={names[i]} />
+            <Post key={keys[i]}  imageUrl={imageUrl} name={names[i]} />
           ) : (
-            <ImageTile key={imageUrl} imageUrl={imageUrl} />
+            <ImageTile key={keys[i]} imageUrl={imageUrl} />
           );
         })}
       </Layout>

@@ -10,29 +10,30 @@ const MuseumGalleryScreen = () => {
   const storage = firebase.storage();
   const db = firebase.firestore();
   const [museumUrls, setMuseumUrls] = useState([]);
-
+  const [keys, setKeys] = useState([])
   useEffect(() => {
     db.collection('museum-gallery')
-      .doc('test')
+      .where("image", "!=", null)
       .get()
-      .then((data) => {
-        return data.get('images');
-      })
-      .then(async (images) => {
-        const urlOps = images.map((url) => {
-          console.log(url)
-         
-          return storage.ref(url.replace(".", "-thumbnail."))
-                        .getDownloadURL();
+      .then(async (snapshot) => {
+        const urlOps = snapshot.docs.map((doc) => {
+          const url = doc.get("image");
+          
+          return storage.ref(url.replace(".", "-thumbnail.")).getDownloadURL();
+        });
+        const docKeys = snapshot.docs.map((doc) => {
+          return doc.id
         });
         const urls = await Promise.all(urlOps);
-        setMuseumUrls(urls);
+        setMuseumUrls(urls.reverse());
+        setKeys(docKeys.reverse())
       });
   }, []);
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <Layout style={styles.layout}>
-        <Gallery imageUrls={museumUrls} />
+        <Gallery  keys={keys} imageUrls={museumUrls} />
       </Layout>
     </SafeAreaView>
   );
