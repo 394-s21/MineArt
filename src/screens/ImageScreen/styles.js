@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    height:"100%", 
-  },
+  // container: {
+  //   height:"100%",
+  //   flex:1 
+  // },
   layout: {
     flex: 1,
     marginTop: '5%',
@@ -25,22 +26,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    minWidth:"100%"
   },
   cardContainer: {
-    width: 320,
-    height: 470,
+    flex:1,
+    flexDirection:"row",
+    width: "100%",
+    height: "100%",
+    justifyContent:"center"
   },
-  baraja: {
-    width: 320,
-    height: 470,
-    backgroundColor: '#FE474C',
-    borderRadius: 5,
-    shadowColor: 'rgba(0,0,0,0.5)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.5,
+  indCard: {
+    margin:'2%',
+  },
+  flipContainer:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   card1: {
     backgroundColor: '#FE474C',

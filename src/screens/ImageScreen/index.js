@@ -1,11 +1,15 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Component } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
-import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity, StatusBar, AppRegistry } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
-//import CardFlip from "react-native-card-flip";
+import Card from "../../components/FlipCards/Card";
 
-import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST, DUMMY_DESCRIPTION } from "../../utils/mock";
-import GestureFlipView from 'react-native-gesture-flip-card';
+
+import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST,
+  leftPrompt,leftExplanation,leftAction,leftSource
+  ,centerPrompt,centerExplanation,centerAction,centerSource
+  ,rightPrompt,rightExplanation,rightAction,rightSource} from "../../utils/mock";
+
 
 import styles from "./styles";
 
@@ -41,13 +45,14 @@ const ImageScreen = ({ navigation }) => {
 
   const Info = () => {
     return (
-      <View style={{width:"100%"}}>
+      <View style={{"minWidth":"100%"}}>
         <Head/>
         <Divider/>
-        {/* <Prompt/> */}
         <View style={styles.buttonsWrapper}>
           <EditButton/>
           <SocialGalleryButton/>
+        </View>
+        <View style={{width:"100%"}}>
         </View>
       </View>
       
@@ -82,33 +87,6 @@ const ImageScreen = ({ navigation }) => {
     );
   }
 
-  const Prompt = () =>{
-    return (
-      <View>
-      <GestureFlipView width={300} height={500}>
-        {renderBack()}
-        {renderFront()}
-      </GestureFlipView>
-      </View>
-    );
-  }
-
-  const renderFront = () => {
-    return (
-      <View style={styles.frontStyle}>
-        <Text style={{fontSize: 25, color: '#fff'}}>{'Front'}</Text>
-      </View>
-    );
-  };
-  
-  const renderBack = () => {
-    return (
-      <View style={styles.backStyle}>
-        <Text style={{fontSize: 25, color: '#fff'}}>{'Back'}</Text>
-      </View>
-    );
-  };
-
   const SocialGalleryButton = () => {
     return (
       <Button 
@@ -131,15 +109,30 @@ const ImageScreen = ({ navigation }) => {
     );
   }
 
+  const Prompts = () => {
+    return (
+      <View style={styles.cardContainer}>
+        <View style={styles.indCard}><Card question={leftPrompt} explanation={leftExplanation} action={leftAction} source={leftSource}/></View>
+        <View style={styles.indCard}><Card question={centerPrompt} explanation={centerExplanation} action={centerAction} source={centerSource}/></View>
+        <View style={styles.indCard}><Card question={rightPrompt} explanation={rightExplanation} action={rightAction} source={rightSource}/></View>
+      </View>
+    )
+  }
+
+
   return (
     <SafeAreaView style={styles.container} >
-      <ImageHeaderScrollView
+      <ImageHeaderScrollView 
         overlayColor="white"
         maxHeight={height}
         minHeight={0}
+        minWidth={100}
         minOverlayOpacity={0}
         maxOverlayOpacity={1}
         useNativeDriver={true}
+        style={{width: Dimensions.get('window').width}}
+        contentContainerStyle={{ flexGrow: 1 }}
+        
         renderHeader={() => (
           <Animated.Image
             onLoad={onLoad}
@@ -159,10 +152,12 @@ const ImageScreen = ({ navigation }) => {
               styles.layout,
               landscape ? landscapeMargin : portraitMargin
               ]}>
+              
               <Info/>
             </Layout>
           </TriggeringView>
         </View>
+        <Prompts/>
       </ImageHeaderScrollView>
     </SafeAreaView>
   );
