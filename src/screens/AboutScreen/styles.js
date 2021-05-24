@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '20%'
   },
   profileImage: {
-    borderRadius: '50%',
+    borderRadius: 10,
     height: 140,
     width: 140,
     marginBottom: 10

@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         fontFamily: 'System',
         color: '#ffffff',
         backgroundColor: 'transparent',
-        "text-shadow":"2px 2px #ff0000"
+        textShadowRadius: 2,
+        textShadowColor: "#ff0000"
       },
     action: {
         paddingTop:"12%",
@@ -62,8 +63,9 @@ const styles = StyleSheet.create({
         fontFamily: 'System',
         color: '#ffffff',
         backgroundColor: 'transparent',
-        "text-shadow":"2px 2px #ff0000"
-        },
+        textShadowRadius: 2,
+        textShadowColor: "#ff0000"
+      },
     source: {
         position:"absolute",
         bottom:0, 
