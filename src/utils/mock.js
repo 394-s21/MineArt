@@ -24,7 +24,7 @@ export const DUMMY_IMAGE_URLS = [
 
 export const DUMMY_EDITED_IMAGE_URLS = [
     "https://i.imgur.com/9Zii7ob.jpg",
-    "https://i.imgur.com/9Zii7ob.jpg",
+    "https://i.imgur.com/4bYyTMz.jpg",
     "https://i.imgur.com/TWUTNDj.jpg",
     "https://i.imgur.com/77nksrB.jpg",
     "https://i.imgur.com/OWdCk0N.jpg",

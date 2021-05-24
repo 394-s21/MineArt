@@ -8,7 +8,8 @@ const ImageTile = ({
   navigateUserImageDetail,
   disableOnPress,
   imgWidth,
-  imgHeight
+  imgHeight,
+  key
 }) => {
   const navigation = useNavigation();
   const opacity = useRef(new Animated.Value(0)).current;
@@ -37,7 +38,7 @@ const ImageTile = ({
       navigation.navigate('Image Details');
     }
   };
-
+  
   return (
     <Pressable onPress={() => onPress(imageUrl)}>
       <Animated.Image
