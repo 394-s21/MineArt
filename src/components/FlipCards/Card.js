@@ -5,8 +5,6 @@ import styles from "./styles";
 
 const Card = (props) => {
     const flipcard = useRef()
-    console.log("this the props")
-    console.log(props)
       return (
         <View style={styles.flipContainer}>
         <CardFlip style={styles.cardContainer} ref={flipcard}>

@@ -98,17 +98,6 @@ const ImageScreen = ({ route, navigation }) => {
     );
   }
   
-  const Description = () => {
-    return (
-      <Text 
-        category='p1'
-        style={{paddingTop: 10}}
-      >
-        {piece.description}
-      </Text>
-    );
-  }
-
   const SocialGalleryButton = () => {
     return (
       <Button 
