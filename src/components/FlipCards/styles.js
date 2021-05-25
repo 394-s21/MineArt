@@ -38,22 +38,23 @@ const styles = StyleSheet.create({
     label: {
       lineHeight: 50,
       textAlign: 'center',
-      fontSize: 40,
+      fontSize: "2rem",
       fontWeight:"bold",
       fontFamily: 'System',
       color: '#ffffff',
       backgroundColor: 'transparent',
+      padding: 10
     },
     explanation: {
-     
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 12,
         fontWeight:"bold",
         fontFamily: 'System',
         color: '#ffffff',
         backgroundColor: 'transparent',
         textShadowRadius: 2,
-        textShadowColor: "#ff0000"
+        textShadowColor: "#ff0000",
+        padding: 10
       },
     action: {
         paddingTop:"12%",
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         backgroundColor: 'transparent',
         textShadowRadius: 2,
-        textShadowColor: "#ff0000"
+        textShadowColor: "#ff0000",
+        padding: 10
       },
     source: {
         position:"absolute",
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         backgroundColor: 'transparent',
         textAlign: 'center',
+        padding: 10
     }
   });
 

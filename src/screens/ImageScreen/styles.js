@@ -29,11 +29,12 @@ const styles = StyleSheet.create({
     minWidth:"100%"
   },
   cardContainer: {
-    flex:1,
-    flexDirection:"row",
+    flexDirection: "row",
+    flexWrap: "wrap",
     width: "100%",
     height: "100%",
-    justifyContent:"center"
+    justifyContent:"center",
+    alignItems: "center"
   },
   indCard: {
     margin:'2%',
