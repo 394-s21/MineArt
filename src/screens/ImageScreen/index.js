@@ -5,7 +5,7 @@ import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 
 import Card from "../../components/FlipCards/Card";
-import {Editor} from "../../components/ImageEditor";
+import ImageEditor from "../../components/ImageEditor";
 
 
 import { leftPrompt,leftExplanation,leftAction,leftSource
@@ -124,7 +124,7 @@ const ImageScreen = ({ route, navigation }) => {
     return (
       <Button 
           style={styles.button}
-          onPress={() => {navigation.navigate("Edit Image")}}
+          onPress={() => {ImageEditor(id, pieceURL);}}
         >
           Create
         </Button>
