@@ -2,23 +2,32 @@ import React, { useRef, useEffect, useState, Component } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
 import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity, StatusBar, AppRegistry } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import { useFirebaseContext } from '../../providers/firebaseProvider';
+
 import Card from "../../components/FlipCards/Card";
+import {Editor} from "../../components/ImageEditor";
 
 
-import { DUMMY_IMAGE_URLS, DUMMY_TITLE, DUMMY_DATE, DUMMY_ARTIST,
-  leftPrompt,leftExplanation,leftAction,leftSource
+import { leftPrompt,leftExplanation,leftAction,leftSource
   ,centerPrompt,centerExplanation,centerAction,centerSource
   ,rightPrompt,rightExplanation,rightAction,rightSource} from "../../utils/mock";
 
 
 import styles from "./styles";
 
-const ImageScreen = ({ navigation }) => {
+const ImageScreen = ({ route, navigation }) => {
+  const firebase = useFirebaseContext();
+  const storage = firebase.storage();
+  const db = firebase.firestore();
+  
+  const { id } = route.params;
   const window = Dimensions.get('window');
+  const opacity = useRef(new Animated.Value(0)).current;
+
   const [height, setHeight] = useState(window.height / 2);
   const [landscape, setLandscape] = useState(window.height < window.width);
-
-  const opacity = useRef(new Animated.Value(0)).current;
+  const [piece, setPiece] = useState({});
+  const [pieceURL, setPieceURL] = useState("");
 
   const onLoad = () => {
     Animated.timing(opacity, {
@@ -39,6 +48,19 @@ const ImageScreen = ({ navigation }) => {
       Dimensions.removeEventListener("change", onChange);
     };
   },[]);
+
+  useEffect(() => {
+    db.collection("museum-gallery").doc(id)
+      .get()
+      .then(async (doc) => {
+        if (doc.exists) {
+          let data = doc.data();
+          setPiece(data);
+          let url = await storage.ref(data.image).getDownloadURL();
+          setPieceURL(url);
+        }
+      })
+  }, [])
 
   const portraitMargin = { marginLeft: '15%', marginRight: '15%'};
   const landscapeMargin = { marginLeft: '25%', marginRight: '25%'};
@@ -63,13 +85,13 @@ const ImageScreen = ({ navigation }) => {
     return (
       <View>
         <Text category='h3'>
-          {DUMMY_TITLE}
+          {piece.title}
         </Text>
         <Text 
           category='h5' 
           appearance='hint'
         >
-          {`${DUMMY_ARTIST}, ${DUMMY_DATE}`}
+          {piece.artist}
         </Text>
       </View>
       
@@ -82,7 +104,7 @@ const ImageScreen = ({ navigation }) => {
         category='p1'
         style={{paddingTop: 10}}
       >
-        {DUMMY_DESCRIPTION}
+        {piece.description}
       </Text>
     );
   }
@@ -119,7 +141,6 @@ const ImageScreen = ({ navigation }) => {
     )
   }
 
-
   return (
     <SafeAreaView style={styles.container} >
       <ImageHeaderScrollView 
@@ -133,10 +154,11 @@ const ImageScreen = ({ navigation }) => {
         style={{width: Dimensions.get('window').width}}
         contentContainerStyle={{ flexGrow: 1 }}
         
-        renderHeader={() => (
+        renderHeader={() => ( 
+          !pieceURL ? null :
           <Animated.Image
             onLoad={onLoad}
-            source={{uri: DUMMY_IMAGE_URLS[3]}}
+            source={{uri: pieceURL}}
             resizeMode="contain"
             style={[{
                       height: height, 

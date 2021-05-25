@@ -4,11 +4,11 @@ import { Text, Layout } from '@ui-kitten/components';
 import ImageTile from '../../components/ImageTile';
 import styles from './styles';
 
-const Post = ({ imageUrl, name }) => {
+const Post = ({ id, imageUrl, name }) => {
   // this component is rendered for social gallery
   return (
     <Layout>
-      <ImageTile imageUrl={imageUrl} navigateUserImageDetail={true} />
+      <ImageTile id={id} imageUrl={imageUrl} navigateUserImageDetail={true} />
       <Text style={styles.createdByText}>Created by {name}</Text>
     </Layout>
   );
@@ -23,9 +23,9 @@ const Gallery = ({ imageUrls, names, keys }) => {
       <Layout style={styles.imageWrapper}>
         {imageUrls && imageUrls.map((imageUrl, i) => {
           return displayName ? (
-            <Post key={keys[i]}  imageUrl={imageUrl} name={names[i]} />
+            <Post key={keys[i]} id={keys[i]} imageUrl={imageUrl} name={names[i]} />
           ) : (
-            <ImageTile key={keys[i]} imageUrl={imageUrl} />
+            <ImageTile key={keys[i]} id={keys[i]} imageUrl={imageUrl} />
           );
         })}
       </Layout>

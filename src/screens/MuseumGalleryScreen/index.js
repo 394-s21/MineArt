@@ -12,7 +12,7 @@ const MuseumGalleryScreen = () => {
   const [museumUrls, setMuseumUrls] = useState([]);
   const [keys, setKeys] = useState([])
   useEffect(() => {
-    db.collection('museum-gallery')
+    db.collection("museum-gallery")
       .where("image", "!=", null)
       .get()
       .then(async (snapshot) => {
@@ -33,7 +33,7 @@ const MuseumGalleryScreen = () => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <Layout style={styles.layout}>
-        <Gallery  keys={keys} imageUrls={museumUrls} />
+        <Gallery keys={keys} imageUrls={museumUrls} />
       </Layout>
     </SafeAreaView>
   );

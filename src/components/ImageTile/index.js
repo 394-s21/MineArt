@@ -4,12 +4,12 @@ import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
 const ImageTile = ({
+  id,
   imageUrl,
   navigateUserImageDetail,
   disableOnPress,
   imgWidth,
   imgHeight,
-  key
 }) => {
   const navigation = useNavigation();
   const opacity = useRef(new Animated.Value(0)).current;
@@ -33,9 +33,9 @@ const ImageTile = ({
         user: null, // TODO: fill this in with actual user later on
         imageUrl: imageUrl
       });
-    } else if (imageUrl.indexOf('test-3') != -1) {
+    } else {
       // Only one image clickable for now
-      navigation.navigate('Image Details');
+      navigation.navigate('Image Details', {"id" : id});
     }
   };
   
