@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState, Component } from "react";
 import { Layout, Text, Divider, Button } from "@ui-kitten/components";
-import { SafeAreaView, View, Animated, Dimensions, TouchableOpacity, StatusBar, AppRegistry } from 'react-native';
+import { Platform, SafeAreaView, View, Animated, Dimensions, } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 
 import Card from "../../components/FlipCards/Card";
-import {Editor} from "../../components/ImageEditor";
+import ImageEditor from "../../components/ImageEditor";
 
 
 import { leftPrompt,leftExplanation,leftAction,leftSource
@@ -119,12 +119,20 @@ const ImageScreen = ({ route, navigation }) => {
       </Button>
     );
   }
+
+  const onPressEditButton = () => {
+    if (Platform.OS == 'web') {
+      navigation.navigate("Edit Image", {"id" : id})
+    } else {
+      ImageEditor(id, pieceURL);
+    }
+  }
   
   const EditButton = () => {
     return (
       <Button 
           style={styles.button}
-          onPress={() => {navigation.navigate("Edit Image", {"id" : id})}}
+          onPress={onPressEditButton}
         >
           Create
         </Button>
