@@ -124,7 +124,7 @@ const ImageScreen = ({ route, navigation }) => {
     return (
       <Button 
           style={styles.button}
-          onPress={() => {navigation.navigate("Edit Image")}}
+          onPress={() => {navigation.navigate("Edit Image", {"id" : id})}}
         >
           Create
         </Button>
