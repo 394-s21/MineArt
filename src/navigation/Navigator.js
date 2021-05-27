@@ -1,5 +1,6 @@
 // library imports
 import React from 'react';
+import { Platform, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,9 +16,12 @@ import SocialGalleryScreen from '../screens/SocialGalleryScreen';
 import ImageScreen from '../screens/ImageScreen';
 import AboutScreen from '../screens/AboutScreen';
 import EditImageScreen from '../screens/EditImageScreen';
+import WebEditImageScreen from '../screens/WebEditImageScreen';
 import UserImageDetailScreen from '../screens/UserImageDetailScreen';
 import styles from './styles';
-import { SafeAreaView } from 'react-native';
+
+const PlatformDependentEditImageScreen = 
+  Platform.OS == 'web' ? WebEditImageScreen : EditImageScreen;
 
 const MuseumStack = createStackNavigator();
 const MuseumStackScreen = () => (
@@ -33,7 +37,7 @@ const MuseumStackScreen = () => (
       component={UserImageDetailScreen}
       options={{ title: 'User Image' }}
     />
-    <MuseumStack.Screen name="Edit Image" component={EditImageScreen} />
+    <MuseumStack.Screen name="Edit Image" component={PlatformDependentEditImageScreen} />
     <MuseumStack.Screen
       name="Social Gallery"
       component={SocialGalleryScreen}
