@@ -14,7 +14,8 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const imageEditorRef = createRef();
 
   const shareEdit = () => {
-    // Not implemented
+    const imageEditor = imageEditorRef.current.getInstance();
+    const editedImageBase64 = imageEditor.toDataURL();
   }
 
   useLayoutEffect(() => {
