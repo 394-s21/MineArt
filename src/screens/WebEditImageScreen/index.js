@@ -26,9 +26,9 @@ const WebEditImageScreen = ({ route, navigation }) => {
         if (doc.exists) {
           let data = doc.data();
           let url = await storage.ref(data.image).getDownloadURL();
-          console.log(url);
+          // Can replace with our own images if we configure CORS access in Firebase
           imageEditor.loadImageFromURL(
-            url,
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/400px-Monet_-_Impression%2C_Sunrise.jpg",
             `artwork ${id}`
           );
         }
