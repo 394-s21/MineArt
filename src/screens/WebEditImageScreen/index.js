@@ -1,6 +1,6 @@
-import React, { createRef, useLayoutEffect } from 'react';
+import React, { createRef, useLayoutEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import { Button } from '@ui-kitten/components';
+import { Button, Card, Input, Text, Modal } from '@ui-kitten/components';
 import 'tui-image-editor/dist/tui-image-editor.css';
 import ImageEditor from '@toast-ui/react-image-editor';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
@@ -13,6 +13,10 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const db = firebase.firestore();
   const { id, pieceURL } = route.params;
   const imageEditorRef = createRef();
+  
+  const [showModal, setShowModal] = useState(false);
+  const [nameValue, setNameValue] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
 
   const shareEdit = () => {
     // get dataUrl using imageEditor API
@@ -33,8 +37,8 @@ const WebEditImageScreen = ({ route, navigation }) => {
         // once data is uploaded to storage, store information to firestore social-feed collection
         const newFileData = {
           artist: '',
-          creatorName: 'Jeff Y.',
-          description: 'This is a great piece of art',
+          creatorName: nameValue,
+          description: descriptionValue,
           id: uuid,
           image: `test/social-feed/${imageId}.jpg`,
           original: '',
@@ -47,6 +51,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
       });
 
       navigation.navigate('Social Gallery', {id: id});
+      setShowModal(false);
   };
 
   // function to convert dataURL to BLOB object
@@ -80,7 +85,6 @@ const WebEditImageScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.root}>
-      {/* <Text style={styles.heading} category="h2">Put your own spin on the painting below! </Text> */}
       <ImageEditor
         ref={imageEditorRef}
         includeUI={{
@@ -116,10 +120,43 @@ const WebEditImageScreen = ({ route, navigation }) => {
         usageStatistics={true}
       />
 
-      <Button style={styles.shareButton} onPress={shareEdit}>
+      <Button style={styles.shareButton} onPress={() => {setShowModal(true);}}>
         {' '}
         Share{' '}
       </Button>
+      {showModal && (
+        <Modal
+        visible={showModal}
+        backdropStyle={styles.backdrop}
+        onBackdropPress={() => {setShowModal(false);}}
+        >
+          <Card disabled={true}>
+            <Text
+              style={{ fontSize: 18, marginBottom: 30, alignSelf: "center" }}
+            >
+              Share your creation
+            </Text>
+            <Input
+              style={{ marginBottom: 20 }}
+              onChangeText={(nextValue) => {
+                setNameValue(nextValue);
+              }}
+              label="Creator name"
+            />
+            <Input
+              style={{ marginBottom: 20 }}
+              onChangeText={(nextValue) => {
+                setDescriptionValue(nextValue);
+              }}
+              label="Thoughts or commentary"
+              multiline={true}
+            />
+            <Button style={styles.joinButtonStyle} onPress={shareEdit}>
+              Share
+            </Button>
+          </Card>
+        </Modal>
+      )}
     </SafeAreaView>
   );
 };

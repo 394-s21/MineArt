@@ -9,6 +9,9 @@ export const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "white"
   },
+  backdrop: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
   heading: {
     marginVertical: 30,
     textAlign: "center"
