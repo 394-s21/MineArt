@@ -1,25 +1,43 @@
-import React, { useRef, useEffect, useState, Component } from "react";
-import { Layout, Text, Divider, Button } from "@ui-kitten/components";
-import { Platform, SafeAreaView, View, Animated, Dimensions, } from 'react-native';
-import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import React, { useRef, useEffect, useState, Component } from 'react';
+import { Layout, Text, Divider, Button } from '@ui-kitten/components';
+import {
+  Platform,
+  SafeAreaView,
+  View,
+  Animated,
+  Dimensions
+} from 'react-native';
+import {
+  ImageHeaderScrollView,
+  TriggeringView
+} from 'react-native-image-header-scroll-view';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 
-import Card from "../../components/FlipCards/Card";
-import ImageEditor from "../../components/ImageEditor";
+import Card from '../../components/FlipCards/Card';
+import ImageEditor from '../../components/ImageEditor';
 
+import {
+  leftPrompt,
+  leftExplanation,
+  leftAction,
+  leftSource,
+  centerPrompt,
+  centerExplanation,
+  centerAction,
+  centerSource,
+  rightPrompt,
+  rightExplanation,
+  rightAction,
+  rightSource
+} from '../../utils/mock';
 
-import { leftPrompt,leftExplanation,leftAction,leftSource
-  ,centerPrompt,centerExplanation,centerAction,centerSource
-  ,rightPrompt,rightExplanation,rightAction,rightSource} from "../../utils/mock";
-
-
-import styles from "./styles";
+import styles from './styles';
 
 const ImageScreen = ({ route, navigation }) => {
   const firebase = useFirebaseContext();
   const storage = firebase.storage();
   const db = firebase.firestore();
-  
+
   const { id } = route.params;
   const window = Dimensions.get('window');
   const opacity = useRef(new Animated.Value(0)).current;
@@ -27,30 +45,31 @@ const ImageScreen = ({ route, navigation }) => {
   const [height, setHeight] = useState(window.height / 2);
   const [landscape, setLandscape] = useState(window.height < window.width);
   const [piece, setPiece] = useState({});
-  const [pieceURL, setPieceURL] = useState("");
+  const [pieceURL, setPieceURL] = useState('');
 
   const onLoad = () => {
     Animated.timing(opacity, {
       toValue: 1,
       duration: 500,
-      useNativeDriver: true,
+      useNativeDriver: true
     }).start();
-  }
+  };
 
   const onChange = ({ window }) => {
     setHeight(window.height / 2);
     window.height < window.width ? setLandscape(true) : setLandscape(false);
-  }
+  };
 
   useEffect(() => {
-    Dimensions.addEventListener("change", onChange);
+    Dimensions.addEventListener('change', onChange);
     return () => {
-      Dimensions.removeEventListener("change", onChange);
+      Dimensions.removeEventListener('change', onChange);
     };
-  },[]);
+  }, []);
 
   useEffect(() => {
-    db.collection("museum-gallery").doc(id)
+    db.collection('museum-gallery')
+      .doc(id)
       .get()
       .then(async (doc) => {
         if (doc.exists) {
@@ -59,88 +78,100 @@ const ImageScreen = ({ route, navigation }) => {
           let url = await storage.ref(data.image).getDownloadURL();
           setPieceURL(url);
         }
-      })
-  }, [])
+      });
+  }, []);
 
-  const portraitMargin = { marginLeft: '15%', marginRight: '15%'};
-  const landscapeMargin = { marginLeft: '25%', marginRight: '25%'};
+  const portraitMargin = { marginLeft: '15%', marginRight: '15%' };
+  const landscapeMargin = { marginLeft: '25%', marginRight: '25%' };
 
   const Info = () => {
     return (
-      <View style={{"minWidth":"100%"}}>
-        <Head/>
-        <Divider/>
+      <View style={{ minWidth: '100%' }}>
+        <Head />
+        <Divider />
         <View style={styles.buttonsWrapper}>
-          <EditButton/>
-          <SocialGalleryButton/>
+          <EditButton />
+          <SocialGalleryButton />
         </View>
-        <View style={{width:"100%"}}>
-        </View>
+        <View style={{ width: '100%' }}></View>
       </View>
-      
     );
-  }
-  
+  };
+
   const Head = () => {
     return (
-      <View>
-        <Text category='h3'>
-          {piece.title}
-        </Text>
-        <Text 
-          category='h5' 
-          appearance='hint'
-        >
+      <Layout style={{ display: 'flex', maxWidth: 'fit-content', padding: 20 }}>
+        <Text category="h3">{piece.title}</Text>
+        <Text category="h5" appearance="hint">
           {piece.artist}
         </Text>
-      </View>
-      
+      </Layout>
     );
-  }
-  
+  };
+
   const SocialGalleryButton = () => {
     return (
-      <Button 
+      <Button
         style={styles.button}
-        onPress={() => {navigation.navigate("Social Gallery")}}
+        onPress={() => {
+          navigation.navigate('Social Gallery');
+        }}
       >
         View Creations
       </Button>
     );
-  }
+  };
 
   const onPressEditButton = () => {
     if (Platform.OS == 'web') {
-      navigation.navigate("Edit Image", {"id" : id})
+      navigation.navigate('Edit Image', { id: id });
     } else {
       ImageEditor(id, pieceURL);
     }
-  }
-  
+  };
+
   const EditButton = () => {
     return (
-      <Button 
-          style={styles.button}
-          onPress={onPressEditButton}
-        >
-          Create
-        </Button>
+      <Button style={styles.button} onPress={onPressEditButton}>
+        Create
+      </Button>
     );
-  }
+  };
 
   const Prompts = () => {
     return (
       <View style={styles.cardContainer}>
-        <View style={styles.indCard}><Card question={leftPrompt} explanation={leftExplanation} action={leftAction} source={leftSource}/></View>
-        <View style={styles.indCard}><Card question={centerPrompt} explanation={centerExplanation} action={centerAction} source={centerSource}/></View>
-        <View style={styles.indCard}><Card question={rightPrompt} explanation={rightExplanation} action={rightAction} source={rightSource}/></View>
+        <View style={styles.indCard}>
+          <Card
+            question={leftPrompt}
+            explanation={leftExplanation}
+            action={leftAction}
+            source={leftSource}
+          />
+        </View>
+        <View style={styles.indCard}>
+          <Card
+            question={centerPrompt}
+            explanation={centerExplanation}
+            action={centerAction}
+            source={centerSource}
+          />
+        </View>
+        <View style={styles.indCard}>
+          <Card
+            question={rightPrompt}
+            explanation={rightExplanation}
+            action={rightAction}
+            source={rightSource}
+          />
+        </View>
       </View>
-    )
-  }
+    );
+  };
 
   return (
-    <SafeAreaView style={styles.container} >
-      <ImageHeaderScrollView 
+    <SafeAreaView style={styles.container}>
+      <ImageHeaderScrollView
         overlayColor="white"
         maxHeight={height}
         minHeight={0}
@@ -148,35 +179,38 @@ const ImageScreen = ({ route, navigation }) => {
         minOverlayOpacity={0}
         maxOverlayOpacity={1}
         useNativeDriver={true}
-        style={{width: Dimensions.get('window').width}}
+        style={{ width: Dimensions.get('window').width }}
         contentContainerStyle={{ flexGrow: 1 }}
-        
-        renderHeader={() => ( 
-          !pieceURL ? null :
-          <Animated.Image
-            onLoad={onLoad}
-            source={{uri: pieceURL}}
-            resizeMode="contain"
-            style={[{
-                      height: height, 
-                      opacity: opacity,
-                      marginTop: 10
-                    }]}
-          />  
-        )}
+        renderHeader={() =>
+          !pieceURL ? null : (
+            <Animated.Image
+              onLoad={onLoad}
+              source={{ uri: pieceURL }}
+              resizeMode="contain"
+              style={[
+                {
+                  height: height,
+                  opacity: opacity,
+                  marginTop: 10
+                }
+              ]}
+            />
+          )
+        }
       >
         <View>
           <TriggeringView>
-            <Layout style={[
-              styles.layout,
-              landscape ? landscapeMargin : portraitMargin
-              ]}>
-              
-              <Info/>
+            <Layout
+              style={[
+                styles.layout,
+                landscape ? landscapeMargin : portraitMargin
+              ]}
+            >
+              <Info />
             </Layout>
           </TriggeringView>
         </View>
-        <Prompts/>
+        <Prompts />
       </ImageHeaderScrollView>
     </SafeAreaView>
   );
