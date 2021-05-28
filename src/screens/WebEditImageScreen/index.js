@@ -5,6 +5,7 @@ import 'tui-image-editor/dist/tui-image-editor.css';
 import ImageEditor from '@toast-ui/react-image-editor';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 import { styles } from './styles';
+import {v4 as uuidv4} from 'uuid';
 
 const WebEditImageScreen = ({ route, navigation }) => {
   const firebase = useFirebaseContext();
@@ -26,19 +27,26 @@ const WebEditImageScreen = ({ route, navigation }) => {
       .child(`social-feed/${imageId}.jpg`)
       .put(blobbed)
       .then((snapshot) => {
+
+        let uuid = uuidv4();
+
         // once data is uploaded to storage, store information to firestore social-feed collection
         const newFileData = {
           artist: '',
           creatorName: 'Jeff Y.',
           description: 'This is a great piece of art',
-          id: id,
+          id: uuid,
           image: `test/social-feed/${imageId}.jpg`,
           original: '',
           title: ''
         };
 
-        db.collection('social-feed').add(newFileData);
+        db.collection('social-feed').doc(uuid).set(newFileData);
+        db.collection('museum-gallery').doc(id)
+          .update({modifications: firebase.firestore.FieldValue.arrayUnion(uuid)})
       });
+
+      navigation.navigate('Social Gallery', {id: id});
   };
 
   // function to convert dataURL to BLOB object
@@ -55,7 +63,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
     return new Blob([u8arr], { type: mime });
   };
 
-  function sleep(ms) {
+  const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 

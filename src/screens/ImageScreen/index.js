@@ -114,7 +114,7 @@ const ImageScreen = ({ route, navigation }) => {
       <Button
         style={styles.button}
         onPress={() => {
-          navigation.navigate('Social Gallery');
+          navigation.navigate('Social Gallery', {id: id});
         }}
       >
         View Creations
