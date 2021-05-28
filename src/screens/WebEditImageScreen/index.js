@@ -10,7 +10,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const firebase = useFirebaseContext();
   const storage = firebase.storage();
   const db = firebase.firestore();
-  const { id } = route.params;
+  const { id, pieceURL } = route.params;
   const imageEditorRef = createRef();
 
   const shareEdit = () => {
@@ -55,23 +55,19 @@ const WebEditImageScreen = ({ route, navigation }) => {
     return new Blob([u8arr], { type: mime });
   };
 
-  useLayoutEffect(() => {
-    const imageEditor = imageEditorRef.current.getInstance();
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-    db.collection('museum-gallery')
-      .doc(id)
-      .get()
-      .then(async (doc) => {
-        if (doc.exists) {
-          let data = doc.data();
-          let url = await storage.ref(data.image).getDownloadURL();
-          // Can replace with our own images if we configure CORS access in Firebase
-          imageEditor.loadImageFromURL(
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/400px-Monet_-_Impression%2C_Sunrise.jpg',
-            `artwork ${id}`
-          );
-        }
-      });
+  useLayoutEffect(() => {
+    const wait = async () => {
+      const imageEditor = imageEditorRef.current.getInstance();
+      while (imageEditor._invoker._isLocked) {
+        await sleep(100);
+      }
+      imageEditor.loadImageFromURL(pieceURL, `artwork ${id}`);
+    }
+    wait();
   }, []);
 
   return (

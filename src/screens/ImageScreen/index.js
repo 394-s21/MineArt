@@ -124,7 +124,7 @@ const ImageScreen = ({ route, navigation }) => {
 
   const onPressEditButton = () => {
     if (Platform.OS == 'web') {
-      navigation.navigate('Edit Image', { id: id });
+      navigation.navigate('Edit Image', { id: id, pieceURL: pieceURL });
     } else {
       ImageEditor(id, pieceURL);
     }
