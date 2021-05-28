@@ -21,13 +21,19 @@ const Gallery = ({ imageUrls, names, keys }) => {
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <Layout style={styles.imageWrapper}>
-        {imageUrls && imageUrls.map((imageUrl, i) => {
-          return displayName ? (
-            <Post key={keys[i]} id={keys[i]} imageUrl={imageUrl} name={names[i]} />
-          ) : (
-            <ImageTile key={keys[i]} id={keys[i]} imageUrl={imageUrl} />
-          );
-        })}
+        {imageUrls &&
+          imageUrls.map((imageUrl, i) => {
+            return displayName ? (
+              <Post
+                key={imageUrl}
+                id={keys[i]}
+                imageUrl={imageUrl}
+                name={names[i]}
+              />
+            ) : (
+              <ImageTile key={imageUrl} id={keys[i]} imageUrl={imageUrl} />
+            );
+          })}
       </Layout>
     </ScrollView>
   );
