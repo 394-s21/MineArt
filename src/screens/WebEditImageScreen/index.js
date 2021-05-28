@@ -23,7 +23,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
     // upload what's currently on canvas to firebase storage as a BLOB
     storage
       .ref('test')
-      .child(`social-feed/${imageId}.jpeg`)
+      .child(`social-feed/${imageId}.jpg`)
       .put(blobbed)
       .then((snapshot) => {
         // once data is uploaded to storage, store information to firestore social-feed collection
@@ -32,7 +32,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
           creatorName: 'Jeff Y.',
           description: 'This is a great piece of art',
           id: id,
-          image: `test/social-feed/${imageId}.jpeg`,
+          image: `test/social-feed/${imageId}.jpg`,
           original: '',
           title: ''
         };
