@@ -26,7 +26,10 @@ const PlatformDependentEditImageScreen =
 const MuseumStack = createStackNavigator();
 const MuseumStackScreen = () => (
   <MuseumStack.Navigator>
-    <MuseumStack.Screen name="Museum Gallery" component={MuseumGalleryScreen} />
+    <MuseumStack.Screen 
+      name="Museum Gallery" 
+      component={MuseumGalleryScreen}
+      options={{ title: 'MineArt' }} />
     <MuseumStack.Screen
       name="Image Details"
       component={ImageScreen}

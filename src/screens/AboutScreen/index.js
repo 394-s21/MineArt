@@ -63,7 +63,16 @@ const AboutScreen = () => {
         <View style={styles.section}>
           <Header text={"What is MineArt?"} />
           <Text category='p1'style={{paddingTop: 10}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Learning in museums has increasingly come to be characterized in terms of 
+            participatory and active engagement on the part of visitors. Here, we present 
+            a design prototype for an online interactive art museum exhibit called MineArt, 
+            an exhibit that allows visitors to create art pieces through modifications of 
+            famous artworks. It also has flip cards containing art-related knowledge and a 
+            gallery for sharing and community building. In this work we hope to facilitate 
+            the meaning-making process of art through creating exhibits that incorporate 
+            audience participation and active prolonged engagement. We hope to empower 
+            visitors by promoting their art appreciation, interpretation, and discussion 
+            in a fun and engaging manner.
           </Text>
         </View>
         <View style={styles.section}>
