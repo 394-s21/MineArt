@@ -169,6 +169,13 @@ const ImageScreen = ({ route, navigation }) => {
     );
   };
 
+  var isMonet
+  if (piece.title === "Impression, Sunrise"){
+    isMonet = true
+  }else{
+    isMonet = false
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageHeaderScrollView
@@ -210,7 +217,7 @@ const ImageScreen = ({ route, navigation }) => {
             </Layout>
           </TriggeringView>
         </View>
-        <Prompts />
+        {isMonet?<Prompts/>:null}
       </ImageHeaderScrollView>
     </SafeAreaView>
   );
