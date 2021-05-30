@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     explanation: {
         textAlign: 'center',
-        fontSize: 12,
+        fontSize: 19,
         fontWeight:"bold",
         fontFamily: 'System',
         color: '#ffffff',
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
         padding: 10
       },
     action: {
-        paddingTop:"12%",
+        paddingTop:"9%",
         textAlign: 'center',
-        fontSize: 18,
-        fontWeight:"bold",
+        fontSize: 22,
+        fontWeight:800,
         fontFamily: 'System',
         color: '#ffffff',
         backgroundColor: 'transparent',
@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
     source: {
         position:"absolute",
         bottom:0, 
-        fontSize:9,
+        fontSize:7,
         color: '#ffffff',
         backgroundColor: 'transparent',
         textAlign: 'center',
-        padding: 10
+        paddingTop:"2%"
     }
   });
 
