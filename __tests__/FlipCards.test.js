@@ -13,7 +13,7 @@ import {
 describe('<Card />', () => {
   // Describing our test
   it('Should render text correctly', async () => {
-    const { getByText, getByPlaceholderText } = render(
+    const { getByText } = render(
       <Card
         question={leftPrompt}
         explanation={leftExplanation}
@@ -21,7 +21,22 @@ describe('<Card />', () => {
         source={leftSource}
       />
     );
-    const question = getByText(leftPrompt);
-    expect(question).not.toBeNull();
+    const flipCard = getByText(leftPrompt);
+    expect(flipCard).not.toBeNull();
+  });
+
+  it('Should render text correctly after flip', async () => {
+    const { getByText } = render(
+      <Card
+        question={leftPrompt}
+        explanation={leftExplanation}
+        action={leftAction}
+        source={leftSource}
+      />
+    );
+    const flipCard = getByText(leftPrompt);
+    fireEvent.press(flipCard);
+    const flipCardFlipped = getByText(leftExplanation);
+    expect(flipCardFlipped).not.toBeNull();
   });
 });
