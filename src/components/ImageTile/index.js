@@ -10,6 +10,7 @@ const ImageTile = ({
   disableOnPress,
   imgWidth,
   imgHeight,
+  testID
 }) => {
   const navigation = useNavigation();
   const opacity = useRef(new Animated.Value(0)).current;
@@ -35,12 +36,12 @@ const ImageTile = ({
       });
     } else {
       // Only one image clickable for now
-      navigation.navigate('Image Details', {"id" : id});
+      navigation.navigate('Image Details', { id: id });
     }
   };
-  
+
   return (
-    <Pressable onPress={() => onPress(imageUrl)}>
+    <Pressable testID={testID} onPress={() => onPress(imageUrl)}>
       <Animated.Image
         onLoad={onLoad}
         style={[
