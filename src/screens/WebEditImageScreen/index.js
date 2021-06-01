@@ -51,8 +51,9 @@ const WebEditImageScreen = ({ route, navigation }) => {
       id: uuid,
       image: `test/social-feed/${imageId}.jpg`,
       original: id,
-      title: ''
-      };
+      title: '',
+      date: firebase.firestore.FieldValue.serverTimestamp(),
+    };
 
     await db.collection('social-feed').doc(uuid).set(newFileData)
     await storage

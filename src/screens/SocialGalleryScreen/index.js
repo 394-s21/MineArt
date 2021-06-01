@@ -18,6 +18,7 @@ const SocialGalleryScreen = ({ route }) => {
 
   useEffect(() => {
     db.collection('social-feed')
+      .orderBy("date", "desc")
       .where('original', '==', id)
       .get()
       .then(async (snapshot) => {
