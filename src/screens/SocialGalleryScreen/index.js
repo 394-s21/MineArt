@@ -17,11 +17,10 @@ const SocialGalleryScreen = ({ route }) => {
 
 
   useEffect(() => {
-    db.collection('social-feed')
+    let unsubscribe = db.collection('social-feed')
       .orderBy("date", "desc")
       .where('original', '==', id)
-      .get()
-      .then(async (snapshot) => {
+      .onSnapshot(async(snapshot) => {
         const docKeys = [];
         const docNames = [];
         const urlOps = [];
@@ -38,6 +37,8 @@ const SocialGalleryScreen = ({ route }) => {
         setImages(urls);
         setNames(docNames);
       });
+      
+      return () => {unsubscribe()}
   }, []);
 
 
