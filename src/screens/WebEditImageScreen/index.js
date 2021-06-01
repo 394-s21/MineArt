@@ -1,6 +1,6 @@
 import React, { createRef, useLayoutEffect, useState, useEffect } from 'react';
 import { SafeAreaView, Dimensions } from 'react-native';
-import { Button, Card, Input, Text, Modal } from '@ui-kitten/components';
+import { Button, Card, Input, Text, Modal, Spinner, Layout } from '@ui-kitten/components';
 import 'tui-image-editor/dist/tui-image-editor.css';
 import ImageEditor from '@toast-ui/react-image-editor';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
@@ -15,6 +15,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const imageEditorRef = createRef();
   
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [nameValue, setNameValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
   const [dims, setDims] = useState({width: Dimensions.get('window').width, height: Dimensions.get('window').height });
@@ -34,6 +35,8 @@ const WebEditImageScreen = ({ route, navigation }) => {
   // }, []);
 
   const shareEdit = async () => {
+    setIsLoading(true);
+    setShowModal(false);
     // get dataUrl using imageEditor API
     const imageEditor = imageEditorRef.current.getInstance();
     const dataUrl = imageEditor.toDataURL();
@@ -64,8 +67,8 @@ const WebEditImageScreen = ({ route, navigation }) => {
       await db.collection('museum-gallery').doc(id)
         .update({modifications: firebase.firestore.FieldValue.arrayUnion(uuid)})
 
+      setIsLoading(false);
       navigation.navigate('Social Gallery', {id: id});
-      setShowModal(false);
   };
 
   // function to convert dataURL to BLOB object
@@ -87,57 +90,69 @@ const WebEditImageScreen = ({ route, navigation }) => {
   }
 
   useLayoutEffect(() => {
-    const wait = async () => {
-      const imageEditor = imageEditorRef.current.getInstance();
-      while (imageEditor._invoker._isLocked) {
-        await sleep(100);
+    if (!isLoading) {
+      const wait = async () => {
+        const imageEditor = imageEditorRef.current.getInstance();
+        while (imageEditor._invoker._isLocked) {
+          await sleep(100);
+        }
+        imageEditor.loadImageFromURL(pieceURL, `artwork ${id}`);
       }
-      imageEditor.loadImageFromURL(pieceURL, `artwork ${id}`);
+      wait();
     }
-    wait();
   }, []);
 
   return (
     <SafeAreaView style={styles.root}>
-      <ImageEditor
-        ref={imageEditorRef}
-        includeUI={{
-          loadImage: {
-            path:
-              'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-            name: 'blank'
-          },
-          menu: [
-            'crop',
-            'flip',
-            'rotate',
-            'draw',
-            'shape',
-            'icon',
-            'text',
-            'mask',
-            'filter'
-          ],
-          initMenu: 'draw',
-          uiSize: {
-            width: `${dims.width}px`,
-            height: `${dims.height}px`
-          },
-          menuBarPosition: 'bottom'
-        }}
-        cssMaxHeight={dims.height * 0.6}
-        cssMaxWidth={dims.width}
-        selectionStyle={{
-          cornerSize: 20,
-          rotatingPointOffset: 70
-        }}
-        usageStatistics={true}
-      />
+      {isLoading && (
+        <Layout style={styles.loadingBackground}>
+          <Spinner  />
+          <Text style={styles.spinnerText}>Please wait, uploading image...</Text>
+        </ Layout>
+      )}
+      {!isLoading && (
+        <>
+          <ImageEditor
+            ref={imageEditorRef}
+            includeUI={{
+              loadImage: {
+                path:
+                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+                name: 'blank'
+              },
+              menu: [
+                'crop',
+                'flip',
+                'rotate',
+                'draw',
+                'shape',
+                'icon',
+                'text',
+                'mask',
+                'filter'
+              ],
+              initMenu: 'draw',
+              uiSize: {
+                width: `${dims.width}px`,
+                height: `${dims.height}px`
+              },
+              menuBarPosition: 'bottom'
+            }}
+            cssMaxHeight={dims.height * 0.6}
+            cssMaxWidth={dims.width}
+            selectionStyle={{
+              cornerSize: 20,
+              rotatingPointOffset: 70
+            }}
+            usageStatistics={true}
+          />
 
-      <Button style={styles.shareButton} onPress={() => {setShowModal(true);}}>
-        {' '}
-        Share{' '}
-      </Button>
+          <Button style={styles.shareButton} onPress={() => {setShowModal(true);}}>
+            {' '}
+            Share{' '}
+          </Button>
+        </>
+      )}
       {showModal && (
         <Modal
         visible={showModal}

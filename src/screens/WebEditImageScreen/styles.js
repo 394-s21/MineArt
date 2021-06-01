@@ -19,5 +19,13 @@ export const styles = StyleSheet.create({
   shareButton: {
     marginTop: 20,
     marginBottom: 20
+  },
+  loadingBackground: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  spinnerText: {
+    margin: '20px'
   }
 });
