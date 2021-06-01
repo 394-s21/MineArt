@@ -35,12 +35,16 @@ const WebEditImageScreen = ({ route, navigation }) => {
   // }, []);
 
   const shareEdit = async () => {
-    setIsLoading(true);
-    setShowModal(false);
     // get dataUrl using imageEditor API
     const imageEditor = imageEditorRef.current.getInstance();
     const dataUrl = imageEditor.toDataURL();
     const blobbed = dataURLtoBlob(dataUrl);
+
+    // Show loading screen
+    if (blobbed) {
+      await setIsLoading(true);
+      await setShowModal(false);
+    }
     // one way to get a unique id in javascript without using uuid
     const imageId = Date.now();
     // upload what's currently on canvas to firebase storage as a BLOB
@@ -90,69 +94,56 @@ const WebEditImageScreen = ({ route, navigation }) => {
   }
 
   useLayoutEffect(() => {
-    if (!isLoading) {
-      const wait = async () => {
-        const imageEditor = imageEditorRef.current.getInstance();
-        while (imageEditor._invoker._isLocked) {
-          await sleep(100);
-        }
-        imageEditor.loadImageFromURL(pieceURL, `artwork ${id}`);
+    const wait = async () => {
+      const imageEditor = imageEditorRef.current.getInstance();
+      while (imageEditor._invoker._isLocked) {
+        await sleep(100);
       }
-      wait();
+      imageEditor.loadImageFromURL(pieceURL, `artwork ${id}`);
     }
+    wait();
   }, []);
 
   return (
     <SafeAreaView style={styles.root}>
-      {isLoading && (
-        <Layout style={styles.loadingBackground}>
-          <Spinner  />
-          <Text style={styles.spinnerText}>Please wait, uploading image...</Text>
-        </ Layout>
-      )}
-      {!isLoading && (
-        <>
-          <ImageEditor
-            ref={imageEditorRef}
-            includeUI={{
-              loadImage: {
-                path:
-                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-                name: 'blank'
-              },
-              menu: [
-                'crop',
-                'flip',
-                'rotate',
-                'draw',
-                'shape',
-                'icon',
-                'text',
-                'mask',
-                'filter'
-              ],
-              initMenu: 'draw',
-              uiSize: {
-                width: `${dims.width}px`,
-                height: `${dims.height}px`
-              },
-              menuBarPosition: 'bottom'
-            }}
-            cssMaxHeight={dims.height * 0.6}
-            cssMaxWidth={dims.width}
-            selectionStyle={{
-              cornerSize: 20,
-              rotatingPointOffset: 70
-            }}
-            usageStatistics={true}
-          />
-
-          <Button style={styles.shareButton} onPress={() => {setShowModal(true);}}>
-            {' '}
-            Share{' '}
-          </Button>
-        </>
-      )}
+      <ImageEditor
+        ref={imageEditorRef}
+        includeUI={{
+          loadImage: {
+            path:
+              'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+            name: 'blank'
+          },
+          menu: [
+            'crop',
+            'flip',
+            'rotate',
+            'draw',
+            'shape',
+            'icon',
+            'text',
+            'mask',
+            'filter'
+          ],
+          initMenu: 'draw',
+          uiSize: {
+            width: `${dims.width}px`,
+            height: `${dims.height}px`
+          },
+          menuBarPosition: 'bottom'
+        }}
+        cssMaxHeight={dims.height * 0.6}
+        cssMaxWidth={dims.width}
+        selectionStyle={{
+          cornerSize: 20,
+          rotatingPointOffset: 70
+        }}
+        usageStatistics={true}
+      />
+      <Button style={styles.shareButton} onPress={() => {setShowModal(true);}}>
+        {' '}
+        Share{' '}
+      </Button>
       {showModal && (
         <Modal
         visible={showModal}
@@ -185,6 +176,12 @@ const WebEditImageScreen = ({ route, navigation }) => {
             </Button>
           </Card>
         </Modal>
+      )}
+      {isLoading && (
+        <Layout style={styles.loadingBackground}>
+          <Spinner  />
+          <Text style={styles.spinnerText}>Please wait, uploading image...</Text>
+        </ Layout>
       )}
     </SafeAreaView>
   );

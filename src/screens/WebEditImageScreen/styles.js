@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
     marginBottom: 20
   },
   loadingBackground: {
+    backgroundColor: 'white',
+    height: "100%",
+    width: "100%",
+    position: "absolute",
+    zIndex: 2,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
