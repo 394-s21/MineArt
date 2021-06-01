@@ -14,40 +14,31 @@ const SocialGalleryScreen = ({ route }) => {
   const [images, setImages] = useState([]);
   const [names, setNames] = useState([]);
   const [keys, setKeys] = useState([]);
-  const [modifications, setModifications] = useState([]);
+
 
   useEffect(() => {
-    let unsubscribe = db
-      .collection('museum-gallery')
-      .doc(id)
-      .onSnapshot((doc) => {
-        setModifications(doc.get('modifications'));
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (modifications.length === 0) {
-      return;
-    }
     db.collection('social-feed')
-      .where('id', 'in', modifications)
+      .where('original', '==', id)
       .get()
       .then(async (snapshot) => {
-        const urlOps = snapshot.docs.map((doc) => {
-          const url = doc.get('image');
-          return storage.ref(url.replace('.', '-thumbnail.')).getDownloadURL();
-        });
-        const docKeys = snapshot.docs.map((doc) => doc.id);
-        const docNames = snapshot.docs.map((doc) => doc.get('creatorName'));
+        const docKeys = [];
+        const docNames = [];
+        const urlOps = [];
+        for (let doc of snapshot.docs) {
+          const url = doc.get('thumbnailImage') || "";
+          if (!url) continue;
+          docKeys.push(doc.id);
+          docNames.push(doc.get("creatorName"))
+          urlOps.push(storage.ref(url).getDownloadURL()
+             .catch(() => undefined));
+        }
         const urls = await Promise.all(urlOps);
         setKeys(docKeys);
         setImages(urls);
         setNames(docNames);
       });
-  }, [modifications]);
+  }, []);
+
 
   return (
     <SafeAreaView style={styles.safeAreaView}>

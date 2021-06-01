@@ -1,3 +1,4 @@
+const { firestore } = require('firebase-admin');
 const path = require('path');
 const sharp = require('sharp');
 const admin = require('./admin');
@@ -29,7 +30,7 @@ const ResizeImages = async (object) => {
   }
 
   const bucket = admin.storage().bucket(object.bucket);
-  
+  const firestore = admin.firestore()
   const filePath = object.name;
   const dirName = path.dirname(filePath);
 
@@ -63,8 +64,22 @@ const ResizeImages = async (object) => {
   } catch (err) {
     console.log(`Upload failed with error ${err}`)
   } 
+
+  console.log(filePath)
+  const metadataDoc = await firestore.collection("social-feed").where("image", "==", filePath).get();
+  if (metadataDoc.size > 1) {
+    console.log(`More than one doc matches ${filePath}`)
+  }
+
+  const doc = metadataDoc.docs[0];
+  doc.ref.set({
+    thumbnailImage: uploadFilePath
+  }, { merge: true })
+
   return;
 }
+
+
 
 const getMetaData = (objectMetadata) => {
   const metadata = {

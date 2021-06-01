@@ -18,7 +18,6 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const [nameValue, setNameValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
   const [dims, setDims] = useState({width: Dimensions.get('window').width, height: Dimensions.get('window').height });
-
   // const onChange = ({ window }) => {
   //   console.log(window);
   //   setDims({
@@ -34,7 +33,7 @@ const WebEditImageScreen = ({ route, navigation }) => {
   //   };
   // }, []);
 
-  const shareEdit = () => {
+  const shareEdit = async () => {
     // get dataUrl using imageEditor API
     const imageEditor = imageEditorRef.current.getInstance();
     const dataUrl = imageEditor.toDataURL();
@@ -42,29 +41,27 @@ const WebEditImageScreen = ({ route, navigation }) => {
     // one way to get a unique id in javascript without using uuid
     const imageId = Date.now();
     // upload what's currently on canvas to firebase storage as a BLOB
-    storage
-      .ref('test')
-      .child(`social-feed/${imageId}.jpg`)
-      .put(blobbed)
-      .then((snapshot) => {
 
-        let uuid = uuidv4();
+    let uuid = uuidv4();
+    // once data is uploaded to storage, store information to firestore social-feed collection
+    const newFileData = {
+      artist: '',
+      creatorName: nameValue,
+      description: descriptionValue,
+      id: uuid,
+      image: `test/social-feed/${imageId}.jpg`,
+      original: id,
+      title: ''
+      };
 
-        // once data is uploaded to storage, store information to firestore social-feed collection
-        const newFileData = {
-          artist: '',
-          creatorName: nameValue,
-          description: descriptionValue,
-          id: uuid,
-          image: `test/social-feed/${imageId}.jpg`,
-          original: '',
-          title: ''
-        };
+    await db.collection('social-feed').doc(uuid).set(newFileData)
+    await storage
+        .ref('test')
+        .child(`social-feed/${imageId}.jpg`)
+        .put(blobbed)
 
-        db.collection('social-feed').doc(uuid).set(newFileData);
-        db.collection('museum-gallery').doc(id)
-          .update({modifications: firebase.firestore.FieldValue.arrayUnion(uuid)})
-      });
+      await db.collection('museum-gallery').doc(id)
+        .update({modifications: firebase.firestore.FieldValue.arrayUnion(uuid)})
 
       navigation.navigate('Social Gallery', {id: id});
       setShowModal(false);
