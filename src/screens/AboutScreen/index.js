@@ -29,6 +29,7 @@ const AboutScreen = () => {
   const storage = firebase.storage();
   const [profiles, setProfiles] = useState(<></>);
   const teamMembers = [
+    'Lexie Z.',
     'Andy M.',
     'Aura U.',
     'Elise L.',
@@ -59,7 +60,7 @@ const AboutScreen = () => {
 
   return (
     <SafeAreaView style={styles.layout}>
-      <ScrollView style={styles.contentWrapper}>
+      <ScrollView style={styles.contentWrapper} showsVerticalScrollIndicator={false}>
         <View style={styles.section}>
           <Header text={"What is MineArt?"} />
           <Text category='p1'style={{paddingTop: 10}}>
@@ -76,7 +77,7 @@ const AboutScreen = () => {
           </Text>
         </View>
         <View style={styles.section}>
-          <Header text={"Developers"} />
+          <Header text={"Meet the Team"} />
           <View style={styles.profileWrapper}>
             {profiles}
           </View>
