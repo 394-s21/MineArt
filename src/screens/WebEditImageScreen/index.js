@@ -1,5 +1,5 @@
-import React, { createRef, useLayoutEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { createRef, useLayoutEffect, useState, useEffect } from 'react';
+import { SafeAreaView, Dimensions } from 'react-native';
 import { Button, Card, Input, Text, Modal } from '@ui-kitten/components';
 import 'tui-image-editor/dist/tui-image-editor.css';
 import ImageEditor from '@toast-ui/react-image-editor';
@@ -17,6 +17,22 @@ const WebEditImageScreen = ({ route, navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [nameValue, setNameValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
+  const [dims, setDims] = useState({width: Dimensions.get('window').width, height: Dimensions.get('window').height });
+
+  // const onChange = ({ window }) => {
+  //   console.log(window);
+  //   setDims({
+  //     width: window.width,
+  //     height: dims.height,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   Dimensions.addEventListener('change', onChange);
+  //   return () => {
+  //     Dimensions.removeEventListener('change', onChange);
+  //   };
+  // }, []);
 
   const shareEdit = () => {
     // get dataUrl using imageEditor API
@@ -106,13 +122,13 @@ const WebEditImageScreen = ({ route, navigation }) => {
           ],
           initMenu: 'draw',
           uiSize: {
-            width: '1000px',
-            height: '1000px'
+            width: `${dims.width}px`,
+            height: `${dims.height}px`
           },
           menuBarPosition: 'bottom'
         }}
-        cssMaxHeight={500}
-        cssMaxWidth={700}
+        cssMaxHeight={dims.height * 0.6}
+        cssMaxWidth={dims.width}
         selectionStyle={{
           cornerSize: 20,
           rotatingPointOffset: 70
