@@ -14,24 +14,9 @@ const SocialGalleryScreen = ({ route }) => {
   const [images, setImages] = useState([]);
   const [names, setNames] = useState([]);
   const [keys, setKeys] = useState([]);
-  const [modifications, setModifications] = useState([]);
 
-  // useEffect(() => {
-  //   let unsubscribe = db
-  //     .collection('museum-gallery')
-  //     .doc(id)
-  //     .onSnapshot((doc) => {
-  //       setModifications(doc.get('modifications'));
-  //     });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
 
   useEffect(() => {
-    // if (modifications.length === 0) {
-    //   return;
-    // }
     db.collection('social-feed')
       .where('original', '==', id)
       .get()
