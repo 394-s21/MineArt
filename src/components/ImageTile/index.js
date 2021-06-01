@@ -32,7 +32,8 @@ const ImageTile = ({
       // https://reactnavigation.org/docs/params/ : for info on how the code below works
       navigation.navigate('User Image Details', {
         user: null, // TODO: fill this in with actual user later on
-        imageUrl: imageUrl
+        imageUrl: imageUrl,
+        id: id
       });
     } else {
       // Only one image clickable for now
