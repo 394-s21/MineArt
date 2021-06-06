@@ -27,7 +27,7 @@ export const FirebaseProvider = ({children}) => {
 export const useFirebaseContext = () => { 
     const context = useContext(FirebaseContext);
     if (context === undefined) { 
-        throw new Error ('useFirebaseContext musrt be called within a FirebaseProvider')
+        throw new Error ('useFirebaseContext must be called within a FirebaseProvider')
     }
     return context;
 }
