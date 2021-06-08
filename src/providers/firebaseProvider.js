@@ -8,12 +8,12 @@ export const FirebaseContext = createContext(undefined);
 export const FirebaseProvider = ({children}) => { 
   if (!app.apps.length) {
     app.initializeApp({
-      apiKey: "REPLACE_HERE",
-      authDomain: "REPLACE_HERE",
-      projectId: "REPLACE_HERE",
-      storageBucket: "REPLACE_HERE",
-      messagingSenderId: "REPLACE_HERE",
-      appId: "REPLACE_HERE"
+      apiKey: "AIzaSyCzC_9kADBHung9z4lMgUFbh3ccLKi-jUU",
+      authDomain: "mineart-f2351.firebaseapp.com",
+      projectId: "mineart-f2351",
+      storageBucket: "mineart-f2351.appspot.com",
+      messagingSenderId: "1030840294581",
+      appId: "1:1030840294581:web:0667fc57c4b1e512e3f2fc"
     });
   }
 

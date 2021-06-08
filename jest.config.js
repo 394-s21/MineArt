@@ -14,9 +14,6 @@ module.exports = {
       '/)',
       //"node_modules/(?!expo-file-system/)"
   ],
-  coveragePathIgnorePatterns:[
-    "node_modules/expo-file-system"
-  ],
   "moduleNameMapper": {
     "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
   }
