@@ -31,7 +31,7 @@ const Gallery = ({ imageUrls, names, keys }) => {
                 name={names[i]}
               />
             ) : (
-              <ImageTile key={imageUrl} id={keys[i]} imageUrl={imageUrl} />
+              <ImageTile testID="image-tile" key={imageUrl} id={keys[i]} imageUrl={imageUrl} />
             );
           })}
       </Layout>
