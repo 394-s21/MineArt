@@ -11,8 +11,8 @@ import ImageScreen from '../src/screens/ImageScreen';
 import { FirebaseProvider } from '../src/providers/firebaseProvider';
 import * as eva from "@eva-design/eva";
 
-const route = {key: "Edit Image-0r2q-I9JKd-9pNdBvKEiX", name: "Edit Image", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7", pieceurl: "https://firebasestorage.googleapis.com/v0/b/mineart-f2351.appspot.com/o/test%2Fmuseum-gallery%2Ftest-20.jpg?alt=media&token=5eeac86d-d856-4b5e-8c6e-28c9b5ff46b8"}}
-//const image_route = {key: "Image Details-gg1FCfD8fyIvXTA9knKkt", name: "Image Details", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7"}};
+//const route = {key: "Edit Image-0r2q-I9JKd-9pNdBvKEiX", name: "Edit Image", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7", pieceurl: "https://firebasestorage.googleapis.com/v0/b/mineart-f2351.appspot.com/o/test%2Fmuseum-gallery%2Ftest-20.jpg?alt=media&token=5eeac86d-d856-4b5e-8c6e-28c9b5ff46b8"}}
+const image_route = {key: "Image Details-gg1FCfD8fyIvXTA9knKkt", name: "Image Details", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7"}};
 
 describe('Edit Image Screen', () => {
     // describe test
