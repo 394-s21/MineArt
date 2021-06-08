@@ -54,5 +54,22 @@ describe('<SocialGalleryScreen />', () => {
         const imageTiles = await waitFor(() => getAllByTestId('image-tile'));
         expect(imageTiles.length).toBeGreaterThan(0);
     });
+    
+    // creator names appear on the screen
+    it('Creator names appear', async () => {
+        //jest.setTimeout(100000);
+        const { getAllByTestId } = render(
+            <FirebaseProvider>
+                <ApplicationProvider {...eva} theme={eva.light}>
+                    <SocialGalleryScreen
+                        route={{params:{id: 'c827a4b3-2535-4561-a6f3-7aa7ab4baeb7'}}}
+                    />
+                </ApplicationProvider>
+            </FirebaseProvider>
+        );  
+        
+        const creatorNames = await waitFor(() => getAllByTestId('creator-text'));
+        expect(creatorNames.length).toBeGreaterThan(0);
+    })
   });
   

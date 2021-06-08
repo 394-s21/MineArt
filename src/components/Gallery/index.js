@@ -9,7 +9,7 @@ const Post = ({ id, imageUrl, name }) => {
   return (
     <Layout>
       <ImageTile testID="image-tile" id={id} imageUrl={imageUrl} navigateUserImageDetail={true} />
-      <Text style={styles.createdByText}>Created by {name}</Text>
+      <Text testID="creator-text" style={styles.createdByText}>Created by {name}</Text>
     </Layout>
   );
 };
