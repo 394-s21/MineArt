@@ -10,7 +10,8 @@ module.exports = {
       '|react-native-card-flip' +
       '|@react-navigation' +
       '|@react-native-community' +
-      '|react-native-iphone-x-helper' +
+      '|react-native-iphone-x-helper' + 
+      "|node_modules/(?!expo-file-system/)" +
       '/)'
   ]
 };
