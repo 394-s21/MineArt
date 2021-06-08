@@ -1,9 +1,11 @@
 # MineArt
 
+View us live: http://mineart-f2351.web.app
+
 ## What is MineArt?
 Learning in museums has increasingly come to be characterized in terms of participatory and active engagement on the part of visitors. Here, we present a design prototype for an online interactive art museum exhibit called MineArt, an exhibit that allows visitors to create art pieces through modifications of famous artworks. It also has flip cards containing art-related knowledge and a gallery for sharing and community building. In this work we hope to facilitate the meaning-making process of art through creating exhibits that incorporate audience participation and active prolonged engagement. We hope to empower visitors by promoting their art appreciation, interpretation, and discussion in a fun and engaging manner.
 
-## Installation
+## Installation and Set Up
 
 First clone this repository to your local development machine, then install the dependencies using node package manager (npm).
 
@@ -11,9 +13,22 @@ First clone this repository to your local development machine, then install the 
 npm install
 ```
 
+We use Firebase for the database and for image storage. To set up Firebase for this app:
+1) Create a new firebase project: https://console.firebase.google.com/u/0/
+2) Install Firebase CLI with `npm install -g firebase-tools`
+3) Install Firebase with `expo install firebase` on Mac/Linux or `npm install firebase` on Windows
+4) Run `firebase init` and use the project you created
+5) To deploy, run `expo build:web` and then `firebase deploy`.
+
+## Running the code
+To run the project locally, run:
+```
+expo start
+```
+
 ## Technologies Used
 
-The MineArt project is built with react-native and expo.
+The MineArt project is built with React Native, Expo, and Firebase. 
 
 ## Known Limitations
 
