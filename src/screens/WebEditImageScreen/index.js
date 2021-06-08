@@ -8,6 +8,8 @@ import { styles } from './styles';
 import {v4 as uuidv4} from 'uuid';
 
 const WebEditImageScreen = ({ route, navigation }) => {
+  console.log("we're here");
+  console.log(navigation);
   const firebase = useFirebaseContext();
   const storage = firebase.storage();
   const db = firebase.firestore();
