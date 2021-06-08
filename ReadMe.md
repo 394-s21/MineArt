@@ -15,10 +15,11 @@ npm install
 
 We use Firebase for the database and for image storage. To set up Firebase for this app:
 1) Create a new firebase project: https://console.firebase.google.com/u/0/
-2) Install Firebase CLI with `npm install -g firebase-tools`
-3) Install Firebase with `expo install firebase` on Mac/Linux or `npm install firebase` on Windows
-4) Run `firebase init` and use the project you created
-5) To deploy, run `expo build:web` and then `firebase deploy`.
+2) Click into your project. Go to "project settings" in the left sidebar. Scroll down and click "Add app." You will get information about the project's apiKey, authDomain, projectId, storageBucket, messagingSenderId, and appId. Paste these into firebaseProvider.js, replacing the "REPLACE_HERE" strings starting on line 10. (https://github.com/394-s21/MineArt/blob/main/src/providers/firebaseProvider.js#L10)
+3) Install Firebase CLI with `npm install -g firebase-tools`
+4) Install Firebase with `expo install firebase` on Mac/Linux or `npm install firebase` on Windows
+5) Run `firebase init` and use the project you created
+6) To deploy, run `expo build:web` and then `firebase deploy`.
 
 ## Running the code
 To run the project locally, run:
