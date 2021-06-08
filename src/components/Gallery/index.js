@@ -8,8 +8,8 @@ const Post = ({ id, imageUrl, name }) => {
   // this component is rendered for social gallery
   return (
     <Layout>
-      <ImageTile id={id} imageUrl={imageUrl} navigateUserImageDetail={true} />
-      <Text style={styles.createdByText}>Created by {name}</Text>
+      <ImageTile testID="image-tile" id={id} imageUrl={imageUrl} navigateUserImageDetail={true} />
+      <Text testID="creator-text" style={styles.createdByText}>Created by {name}</Text>
     </Layout>
   );
 };

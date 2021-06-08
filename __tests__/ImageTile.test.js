@@ -28,12 +28,13 @@ describe('<ImageTile />', () => {
 
   it('Clicking on image should open detail view with correct user and description', async () => {
     const testId = 'helloworld';
+    const id = 1;
     const testImageUrl =
       'https://images.metmuseum.org/CRDImages/ep/original/DT49.jpg';
     const { getByTestId } = render(
       <ImageTile
         testID={testId}
-        id={1}
+        id={id}
         imageUrl={testImageUrl}
         navigateUserImageDetail={true}
       />
@@ -41,17 +42,34 @@ describe('<ImageTile />', () => {
     const imageTileObj = getByTestId(testId);
     fireEvent.press(imageTileObj);
     expect(mockedNavigate).toHaveBeenCalledTimes(1);
-    const expectedParams = { imageUrl: testImageUrl, user: null };
+    const expectedParams = { id: id, imageUrl: testImageUrl, user: null };
     expect(mockedNavigate).toHaveBeenCalledWith(
       'User Image Details',
       expectedParams
     );
-    // expect(navigation).toHaveBeenCalledTimes(1);
-    // const imageTileObj = getByTestId(testId);
-    // const { getByTestId } = render(<MockedNavigator testId={testId} />);
-    // const item = getByTestId(testId);
-    // expect(item).not.toBeNull();
-    // expect(toJSON()).toMatchSnapshot();
-    // expect(imageTileObj).not.toBeNull();
   });
+
+  it('Clicking on image in museum gallery should open up the details view with appropriate information', async () => {
+    const testId = 'helloworld';
+    const id = 1;
+    const testImageUrl =
+      'https://images.metmuseum.org/CRDImages/ep/original/DT49.jpg';
+    const { getByTestId } = render(
+      <ImageTile
+        testID={testId}
+        id={id}
+        imageUrl={testImageUrl}
+        navigateUserImageDetail={false}
+      />
+    );
+    const imageTileObj = getByTestId(testId);
+    fireEvent.press(imageTileObj);
+    expect(mockedNavigate).toHaveBeenCalledTimes(1);
+    const expectedParams = { id: id };
+    expect(mockedNavigate).toHaveBeenCalledWith(
+      'Image Details',
+      expectedParams
+    );
+  });
+
 });

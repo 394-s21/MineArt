@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.14.2",
     "@eva-design/eva": "^2.1.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.10",
@@ -40,7 +41,9 @@
     "react-native-svg": "12.1.0",
     "react-native-unimodules": "~0.13.3",
     "react-native-web": "~0.13.12",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "xhr2": "^0.2.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
