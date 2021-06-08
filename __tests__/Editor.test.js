@@ -29,17 +29,17 @@ describe('Edit Image Screen', () => {
         expect(createbutton).not.toBeNull();
     });
 
-    // it("renders share button", () => {
-    //     const { getByText } = render(
-    //         <FirebaseProvider>
-    //             <ApplicationProvider {...eva} theme={eva.light}>
-    //                 <WebEditImageScreen route={edit_route}/>
-    //             </ApplicationProvider>
-    //         </FirebaseProvider>
-    //     );
+    it("renders share button", () => {
+        const { getByText } = render(
+            <FirebaseProvider>
+                <ApplicationProvider {...eva} theme={eva.light}>
+                    <WebEditImageScreen route={edit_route}/>
+                </ApplicationProvider>
+            </FirebaseProvider>
+        );
 
-    //     const sharebutton = getByText('Share');
-    //     expect(sharebutton).not.toBeNull();
-    // });
+        const sharebutton = getByText('Share');
+        expect(sharebutton).not.toBeNull();
+    });
 
 });
