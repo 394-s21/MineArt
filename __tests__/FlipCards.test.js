@@ -12,6 +12,13 @@ import {
 // Describing a test suite
 describe('<Card />', () => {
   // Describing our test
+  it('Should render flip card', async () => {
+    const card = render(
+      <Card/>
+    );
+    expect(card).not.toBeNull();
+  });
+
   it('Should render text correctly', async () => {
     const { getByText } = render(
       <Card
@@ -39,13 +46,5 @@ describe('<Card />', () => {
     const flipCardFlipped = getByText(leftExplanation);
     expect(flipCardFlipped).not.toBeNull();
   });
-
-  it('Should render flip card', async () => {
-    const card = render(
-      <Card/>
-    );
-    expect(card).not.toBeNull();
-  });
-
 
 });
