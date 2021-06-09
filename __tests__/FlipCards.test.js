@@ -39,4 +39,13 @@ describe('<Card />', () => {
     const flipCardFlipped = getByText(leftExplanation);
     expect(flipCardFlipped).not.toBeNull();
   });
+
+  it('Should render flip card', async () => {
+    const card = render(
+      <Card/>
+    );
+    expect(card).not.toBeNull();
+  });
+
+
 });
