@@ -127,13 +127,13 @@ const ImageScreen = ({ route, navigation }) => {
     if (Platform.OS == 'web') {
       navigation.navigate('Edit Image', { id: id, pieceURL: pieceURL });
     } else {
-      // ImageEditor(id, pieceURL);
+      //ImageEditor(id, pieceURL);
     }
   };
 
   const EditButton = () => {
     return (
-      <Button style={styles.button} onPress={onPressEditButton}>
+      <Button style={styles.button} onPress={() => {navigation.navigate('Edit Image', { id: id, pieceURL: pieceURL });}} testID="edit-button">
         Create
       </Button>
     );

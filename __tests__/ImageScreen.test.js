@@ -7,6 +7,7 @@ import { FirebaseProvider } from "../src/providers/firebaseProvider";
 import { ApplicationProvider } from "@ui-kitten/components";
 import ImageScreen from '../src/screens/ImageScreen';
 
+const image_route = {key: "Image Details-gg1FCfD8fyIvXTA9knKkt", name: "Image Details", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7"}};
 global.XMLHttpRequest = require('xhr2');
 const mockedNavigate = jest.fn();
 
@@ -50,6 +51,32 @@ describe('<ImageScreen />', () => {
         expect(mockedNavigate).toHaveBeenCalledWith(
           'Social Gallery',
           expectedParams
+        );
+    });
+
+     // test whether clicking on "Create" leads to editor screen
+    it("create leads to editor screen", async () => {
+        const id = 'c827a4b3-2535-4561-a6f3-7aa7ab4baeb7';
+        
+        const { getByTestId } = render(
+            <FirebaseProvider>
+                <ApplicationProvider {...eva} theme={eva.light}>
+                    <ImageScreen navigation={{navigate: mockedNavigate}} route={image_route}/>
+                </ApplicationProvider>
+            </FirebaseProvider>
+        );
+        const createbutton = await waitFor(() => getByTestId("edit-button"));
+        expect(createbutton).not.toBeNull();
+        
+        await act(() => {
+            fireEvent.press(createbutton);
+        })
+
+        expect(mockedNavigate).toHaveBeenCalledTimes(1);
+        const expectedParams = { id: id, pieceURL: ""};
+        expect(mockedNavigate).toHaveBeenCalledWith(
+            'Edit Image',
+            expectedParams
         );
     });
 
