@@ -1,11 +1,16 @@
 import 'react-native';
 import React from 'react';
+import { shallow,configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import * as eva from "@eva-design/eva";
 import { render, waitFor, fireEvent, act } from '@testing-library/react-native';
 
 import { FirebaseProvider } from "../src/providers/firebaseProvider";
 import { ApplicationProvider } from "@ui-kitten/components";
 import ImageScreen from '../src/screens/ImageScreen';
+import {
+  Animated
+} from 'react-native';
 
 const image_route = {key: "Image Details-gg1FCfD8fyIvXTA9knKkt", name: "Image Details", params:{id: "c827a4b3-2535-4561-a6f3-7aa7ab4baeb7"}};
 global.XMLHttpRequest = require('xhr2');
@@ -30,6 +35,20 @@ describe('<ImageScreen />', () => {
     // Alternatively, set "clearMocks" in your Jest config to "true"
     mockedNavigate.mockClear();
   });
+    configure({adapter: new Adapter()});
+    it('Image appears on Image Screen', async() => {
+      const id = 'c827a4b3-2535-4561-a6f3-7aa7ab4baeb7';
+      const wrapper = shallow(
+        <FirebaseProvider>
+            <ApplicationProvider {...eva} theme={eva.light}>
+                <ImageScreen navigation={{navigate: mockedNavigate}} route={image_route}/>
+            </ApplicationProvider>
+        </FirebaseProvider>
+      )
+      expect(wrapper.containsMatchingElement(<Animated.Image/>)).toEqual(true)
+    
+      
+    })
 
     it('Clicking on view creations brings opens social gallery n', async () => {
       const id = '07587c49-abdf-4e89-b2c5-9d2b5409c1a3'
