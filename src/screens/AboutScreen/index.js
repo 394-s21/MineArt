@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ScrollView, View, Image, SafeAreaView } from 'react-native';
 import { Divider, Text } from "@ui-kitten/components";
 import { useFirebaseContext } from '../../providers/firebaseProvider';
@@ -6,7 +6,7 @@ import styles from "./styles";
 
 const Profile = ({imageUrl, name}) => {
   return (
-    <View style={styles.profile}>
+    <View testID="profile-pic" style={styles.profile}>
       <Image style={styles.profileImage} source={{uri: imageUrl}} />
       <Text category='label'>{name}</Text>
     </View>
@@ -28,6 +28,8 @@ const AboutScreen = () => {
   const firebase = useFirebaseContext();
   const storage = firebase.storage();
   const [profiles, setProfiles] = useState(<></>);
+  const mountedRef = useRef(true);
+
   const teamMembers = [
     'Lexie Z.',
     'Andy M.',
@@ -52,10 +54,14 @@ const AboutScreen = () => {
           key={`profilePic${idx}`}
           name={teamMembers[idx]} 
         />);
-      setProfiles(updatedProfiles);
+      if (mountedRef.current) {
+        setProfiles(updatedProfiles);
+      }
     };
 
     getProfilePics();
+
+    return () => { mountedRef.current = false; };
   }, []);
 
   return (
@@ -78,7 +84,7 @@ const AboutScreen = () => {
         </View>
         <View style={styles.section}>
           <Header text={"Meet the Team"} />
-          <View style={styles.profileWrapper}>
+          <View style={styles.profileWrapper} >
             {profiles}
           </View>
         </View>
