@@ -6,6 +6,7 @@ import ImageEditor from '@toast-ui/react-image-editor';
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 import { styles } from './styles';
 import {v4 as uuidv4} from 'uuid';
+import "./tui-color-picker.css";
 
 const WebEditImageScreen = ({ route, navigation }) => {
   console.log("we're here");

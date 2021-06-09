@@ -14,7 +14,7 @@ import {
 import { useFirebaseContext } from '../../providers/firebaseProvider';
 
 import Card from '../../components/FlipCards/Card';
-import ImageEditor from '../../components/ImageEditor';
+// import ImageEditor from '../../components/ImageEditor';
 
 import {
   leftPrompt,
@@ -116,6 +116,7 @@ const ImageScreen = ({ route, navigation }) => {
         onPress={() => {
           navigation.navigate('Social Gallery', {id: id});
         }}
+        testID="view-creations"
       >
         View Creations
       </Button>
@@ -126,7 +127,7 @@ const ImageScreen = ({ route, navigation }) => {
     if (Platform.OS == 'web') {
       navigation.navigate('Edit Image', { id: id, pieceURL: pieceURL });
     } else {
-      ImageEditor(id, pieceURL);
+      // ImageEditor(id, pieceURL);
     }
   };
 
